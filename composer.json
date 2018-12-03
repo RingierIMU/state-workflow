@@ -1,0 +1,29 @@
+{
+    "name": "oneafricamedia/state-workflow",
+    "description": "State Management workflow for Laravel",
+    "type": "library",
+    "version": "0.0.0",
+    "require": {
+        "php": ">=5.6.4",
+        "symfony/workflow": "^4.1",
+        "illuminate/support": "^5.7"
+    },
+    "authors": [
+        {
+            "name": "Norby Baruani",
+            "email": "norbyb@roam.afica"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Oneafricamedia\\StateWorkflow\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Oneafricamedia\\StateWorkflow\\StateWorkflowServiceProvider"
+            ]
+        }
+    }
+}
