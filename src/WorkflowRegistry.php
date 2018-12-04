@@ -127,6 +127,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
             $className = Workflow::class;
         }
 
+        // TODO: fix this
         $className = StateWorkflow::class;
 
         return new $className($workflowData, $definition, $markingStore, $this->dispatcher, $name);
@@ -142,7 +143,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     protected function getMarkingStoreInstance(array $workflowData)
     {
         $markingStoreData = isset($workflowData['marking_store']) ? $workflowData['marking_store'] : [];
-        $arguments = isset($workflowData['property_path']) ? [$workflowData['property_path']] : ['state'];
+        $arguments = isset($workflowData['property_path']) ? [$workflowData['property_path']] : ['current_state'];
 
         if (isset($markingStoreData['class'])) {
             $className = $markingStoreData['class'];

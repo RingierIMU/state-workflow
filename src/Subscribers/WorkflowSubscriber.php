@@ -1,6 +1,5 @@
 <?php namespace Oneafricamedia\StateWorkflow\Subscribers;
 
-use Illuminate\Support\Facades\Log;
 use Oneafricamedia\StateWorkflow\Events\CompletedEvent;
 use Oneafricamedia\StateWorkflow\Events\EnteredEvent;
 use Oneafricamedia\StateWorkflow\Events\EnterEvent;
@@ -11,6 +10,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\Event\GuardEvent as SymfonyGuardEvent;
 
+/**
+ * Class WorkflowSubscriber
+ * @package Oneafricamedia\StateWorkflow\Subscribers
+ */
 class WorkflowSubscriber implements EventSubscriberInterface
 {
     /**
@@ -23,10 +26,7 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $workflowName   = $event->getWorkflowName();
         $transitionName = $event->getTransition()->getName();
 
-        Log::info(__METHOD__ . " worflow: " . $event->getWorkflowName());
-
         event(new GuardEvent($event));
-        event('workflow.guard', $event);
         event(sprintf('workflow.%s.guard', $workflowName), $event);
         event(sprintf('workflow.%s.guard.%s', $workflowName, $transitionName), $event);
     }
@@ -42,7 +42,6 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $workflowName = $event->getWorkflowName();
 
         event(new LeaveEvent($event));
-        event('workflow.leave', $event);
         event(sprintf('workflow.%s.leave', $workflowName), $event);
 
         foreach ($places as $place) {
@@ -61,7 +60,6 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $transitionName = $event->getTransition()->getName();
 
         event(new TransitionEvent($event));
-        event('workflow.transition', $event);
         event(sprintf('workflow.%s.transition', $workflowName), $event);
         event(sprintf('workflow.%s.transition.%s', $workflowName, $transitionName), $event);
     }
@@ -78,7 +76,6 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $workflowName = $event->getWorkflowName();
 
         event(new EnterEvent($event));
-        event('workflow.enter', $event);
         event(sprintf('workflow.%s.enter', $workflowName), $event);
 
         foreach ($places as $place) {
@@ -96,8 +93,17 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $places       = $event->getTransition()->getTos();
         $workflowName = $event->getWorkflowName();
 
+        $from = implode(",", $event->getTransition()->getFroms());
+        $to = implode(",", $event->getTransition()->getTos());
+        $model = $event->getSubject();
+
+        $model->saveStateHistory([
+            "transition" => $event->getTransition()->getName(),
+            "from" => $from,
+            "to" => $to
+        ]);
+
         event(new EnteredEvent($event));
-        event('workflow.entered', $event);
         event(sprintf('workflow.%s.entered', $workflowName), $event);
 
         foreach ($places as $place) {
@@ -116,7 +122,6 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $transitionName = $event->getTransition()->getName();
 
         event(new CompletedEvent($event));
-        event('workflow.completed', $event);
         event(sprintf('workflow.%s.completed', $workflowName), $event);
         event(sprintf('workflow.%s.completed.%s', $workflowName, $transitionName), $event);
     }

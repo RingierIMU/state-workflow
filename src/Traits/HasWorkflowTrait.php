@@ -1,6 +1,7 @@
 <?php namespace Oneafricamedia\StateWorkflow\Traits;
 
 use Oneafricamedia\StateWorkflow\Interfaces\WorkflowRegistryInterface;
+use Oneafricamedia\StateWorkflow\Models\StateWorkflowHistory;
 use Oneafricamedia\StateWorkflow\Workflow\StateWorkflow;
 
 /**
@@ -10,6 +11,13 @@ trait HasWorkflowTrait
 {
     /** @var StateWorkflow */
     protected $workflow;
+
+    /**
+     * Model to save model change history from one state to another
+     *
+     * @var string
+     */
+    private $stateHistoryModel = StateWorkflowHistory::class;
 
     /**
      * @return StateWorkflow
@@ -50,6 +58,30 @@ trait HasWorkflowTrait
     public function canTransition($transition)
     {
         return $this->workflow()->can($this, $transition);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function stateHistory()
+    {
+        return $this->hasMany($this->stateHistoryModel, 'model_id', $this->modelPrimaryKey());
+    }
+
+    /**
+     * Save Model changes and log changes to StateHistory table
+     *
+     * @param array $transitionData
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function saveStateHistory(array $transitionData)
+    {
+        $this->save();
+
+        $transitionData[$this->authUserForeignKey()] = $this->authenticatedUserId();
+        $transitionData['model_name'] = get_class();
+
+        return $this->stateHistory()->create($transitionData);
     }
 
     /**

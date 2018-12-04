@@ -14,11 +14,8 @@ class StateWorkflowServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configPath = $this->configPath();
-
-        $this->publishes([
-            $configPath => config_path('workflow.php')
-        ], 'config');
+        $this->publishConfig();
+        $this->loadMigrations();
     }
 
     /**
@@ -43,6 +40,24 @@ class StateWorkflowServiceProvider extends ServiceProvider
     protected function configPath()
     {
         return __DIR__ . '/config/workflow.php';
+    }
+
+    /**
+     * Publish config file
+     */
+    protected function publishConfig()
+    {
+        $this->publishes([
+            $this->configPath() => config_path('workflow.php')
+        ], 'config');
+    }
+
+    /**
+     * Load migration files
+     */
+    protected function loadMigrations()
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
     }
 
     /**
