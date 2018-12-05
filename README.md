@@ -10,13 +10,13 @@ For Laravel versions lower than 5.5, this step is important after running above 
 ```
 RingierInternationalMarketplaceUnit\StateWorkflow\StateWorkflowServiceProvider::class
 ```
-Publish config/workflow.php
+Publish config/workflow.php file
 ```
 $ php artisan vendor:publish --provider="RingierInternationalMarketplaceUnit\StateWorkflow\StateWorkflowServiceProvider"
 ```
 
-## Usage
-1. Open config/workflow.php
+## Configuration
+1. Open config/workflow.php and configure it
 ```
 'user' => [
         // class of your domain object
@@ -55,8 +55,32 @@ $ php artisan vendor:publish --provider="RingierInternationalMarketplaceUnit\Sta
         ],
     ],
 ```
-2. Replace sample values
-3. Open your the Model class that you want to enable workflow and add the following trait
+2. Add `HasWorkflowTrait` to your model class
 ```
-use HasWorkflowTrait;
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Traits\HasWorkflowTrait;
+
+class Post extends Model
+{
+    use HasWorkflowTrait;
+}
 ```
+
+## Usage
+
+## Fired Event
+During state/workflow transition, the following events are fired:
+```
+RingierInternationalMarketplaceUnit\StateWorkflow\Events\CompletedEvent
+RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnteredEvent
+RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnterEvent
+RingierInternationalMarketplaceUnit\StateWorkflow\Events\GuardEvent
+RingierInternationalMarketplaceUnit\StateWorkflow\Events\LeaveEvent
+RingierInternationalMarketplaceUnit\StateWorkflow\Events\TransitionEvent
+```
+
+## Subscriber
