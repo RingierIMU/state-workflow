@@ -6,17 +6,24 @@
     "require": {
         "php": ">=5.6.4",
         "symfony/workflow": "^4.1",
-        "illuminate/support": "^5.7"
+        "illuminate/support": "^5.7",
+        "symfony/event-dispatcher": "^4.2",
+        "illuminate/events": "^5.7"
     },
     "authors": [
         {
             "name": "Norby Baruani",
-            "email": "norbyb@roam.afica"
+            "email": "norby.baruani@gmail.com"
         }
     ],
     "autoload": {
         "psr-4": {
             "Oneafricamedia\\StateWorkflow\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
     },
     "extra": {
@@ -25,5 +32,8 @@
                 "Oneafricamedia\\StateWorkflow\\StateWorkflowServiceProvider"
             ]
         }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.4"
     }
 }
