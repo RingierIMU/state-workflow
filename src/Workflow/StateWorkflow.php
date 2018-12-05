@@ -44,6 +44,7 @@ class StateWorkflow extends Workflow implements StateWorkflowInterface
     public function getState($object)
     {
         $accessor = new PropertyAccessor();
-        return $accessor->getValue($object, $this->config['property_path']);
+        $propertyPath = isset($this->config['property_path']) ? $this->config['property_path'] : 'current_state';
+        return $accessor->getValue($object, $propertyPath);
     }
 }

@@ -99,7 +99,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
         $markingStore = $this->getMarkingStoreInstance($workflowData);
         $workflow = $this->getWorkflowInstance($name, $workflowData, $definition, $markingStore);
 
-        foreach ($workflowData['supports'] as $supportedClass) {
+        foreach ($workflowData['class'] as $supportedClass) {
             $this->add($workflow, $supportedClass);
         }
     }
