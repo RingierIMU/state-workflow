@@ -1,10 +1,10 @@
-<?php namespace Oneafricamedia\StateWorkflow\Events;
+<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Events;
 
 use Symfony\Component\Workflow\Event\Event;
 
 /**
  * Class BaseEvent
- * @package Oneafricamedia\StateWorkflow\Events
+ * @package RingierInternationalMarketplaceUnit\StateWorkflow\Events
  */
 abstract class BaseEvent
 {

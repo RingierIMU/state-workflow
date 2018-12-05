@@ -1,8 +1,8 @@
-<?php namespace Oneafricamedia\StateWorkflow;
+<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow;
 
-use Oneafricamedia\StateWorkflow\Interfaces\WorkflowRegistryInterface;
-use Oneafricamedia\StateWorkflow\Subscribers\WorkflowSubscriber;
-use Oneafricamedia\StateWorkflow\Workflow\StateWorkflow;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces\WorkflowRegistryInterface;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Subscribers\WorkflowSubscriber;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Workflow\StateWorkflow;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Workflow\Definition;
 use Symfony\Component\Workflow\DefinitionBuilder;
@@ -17,7 +17,7 @@ use Symfony\Component\Workflow\Workflow;
 
 /**
  * Class WorkflowRegistry
- * @package Oneafricamedia\StateWorkflow
+ * @package RingierInternationalMarketplaceUnit\StateWorkflow
  */
 class WorkflowRegistry implements WorkflowRegistryInterface
 {

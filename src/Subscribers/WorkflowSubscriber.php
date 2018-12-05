@@ -1,18 +1,18 @@
-<?php namespace Oneafricamedia\StateWorkflow\Subscribers;
+<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Subscribers;
 
-use Oneafricamedia\StateWorkflow\Events\CompletedEvent;
-use Oneafricamedia\StateWorkflow\Events\EnteredEvent;
-use Oneafricamedia\StateWorkflow\Events\EnterEvent;
-use Oneafricamedia\StateWorkflow\Events\GuardEvent;
-use Oneafricamedia\StateWorkflow\Events\LeaveEvent;
-use Oneafricamedia\StateWorkflow\Events\TransitionEvent;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Events\CompletedEvent;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnteredEvent;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnterEvent;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Events\GuardEvent;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Events\LeaveEvent;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Events\TransitionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\Event\GuardEvent as SymfonyGuardEvent;
 
 /**
  * Class WorkflowSubscriber
- * @package Oneafricamedia\StateWorkflow\Subscribers
+ * @package RingierInternationalMarketplaceUnit\StateWorkflow\Subscribers
  */
 class WorkflowSubscriber implements EventSubscriberInterface
 {

@@ -1,5 +1,5 @@
 {
-    "name": "oneafricamedia/state-workflow",
+    "name": "ringierInternationalMarketplaceUnit/state-workflow",
     "description": "State Management workflow for Laravel",
     "type": "library",
     "version": "0.0.0",
@@ -18,7 +18,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Oneafricamedia\\StateWorkflow\\": "src/"
+            "RingierInternationalMarketplaceUnit\\StateWorkflow\\": "src/"
         }
     },
     "autoload-dev": {
@@ -29,7 +29,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Oneafricamedia\\StateWorkflow\\StateWorkflowServiceProvider"
+                "RingierInternationalMarketplaceUnit\\StateWorkflow\\StateWorkflowServiceProvider"
             ]
         }
     },

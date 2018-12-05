@@ -1,8 +1,8 @@
-<?php namespace Oneafricamedia\StateWorkflow\Interfaces;
+<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces;
 
 /**
  * Interface StateWorkflowInterface
- * @package Oneafricamedia\StateWorkflow\Interfaces
+ * @package RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces
  */
 interface StateWorkflowInterface
 {

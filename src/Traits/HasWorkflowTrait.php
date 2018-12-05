@@ -1,8 +1,8 @@
-<?php namespace Oneafricamedia\StateWorkflow\Traits;
+<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Traits;
 
-use Oneafricamedia\StateWorkflow\Interfaces\WorkflowRegistryInterface;
-use Oneafricamedia\StateWorkflow\Models\StateWorkflowHistory;
-use Oneafricamedia\StateWorkflow\Workflow\StateWorkflow;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces\WorkflowRegistryInterface;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Models\StateWorkflowHistory;
+use RingierInternationalMarketplaceUnit\StateWorkflow\Workflow\StateWorkflow;
 
 /**
  * Trait HasWorkflowTrait

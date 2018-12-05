@@ -1,4 +1,4 @@
-<?php namespace Oneafricamedia\StateWorkflow\Models;
+<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  *
  * Class StateWorkflowHistory
- * @package Oneafricamedia\StateWorkflow\Models
+ * @package RingierInternationalMarketplaceUnit\StateWorkflow\Models
  */
 class StateWorkflowHistory extends Model
 {
