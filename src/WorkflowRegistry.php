@@ -99,9 +99,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
         $markingStore = $this->getMarkingStoreInstance($workflowData);
         $workflow = $this->getWorkflowInstance($name, $workflowData, $definition, $markingStore);
 
-        foreach ($workflowData['class'] as $supportedClass) {
-            $this->add($workflow, $supportedClass);
-        }
+        $this->add($workflow, $workflowData['class']);
     }
 
     /**
@@ -119,25 +117,34 @@ class WorkflowRegistry implements WorkflowRegistryInterface
         Definition $definition,
         MarkingStoreInterface $markingStore
     ) {
-        if (isset($workflowData['class'])) {
-            $className = $workflowData['class'];
+        $className = $this->getWorkflowClass($workflowData);
+
+        return new $className($workflowData, $definition, $markingStore, $this->dispatcher, $name);
+    }
+
+    /**
+     * @param array $workflowData
+     * @param bool $override
+     * @return mixed|string
+     */
+    private function getWorkflowClass(array $workflowData, $override = true)
+    {
+        if ($override) {
+            $className = StateWorkflow::class;
         } elseif (isset($workflowData['type']) && $workflowData['type'] === 'state_machine') {
             $className = StateMachine::class;
         } else {
             $className = Workflow::class;
         }
 
-        // TODO: fix this
-        $className = StateWorkflow::class;
-
-        return new $className($workflowData, $definition, $markingStore, $this->dispatcher, $name);
+        return $className;
     }
 
     /**
      * Return the making store instance
      *
      * @param array $workflowData
-     * @return object
+     * @return object|MarkingStoreInterface
      * @throws \ReflectionException
      */
     protected function getMarkingStoreInstance(array $workflowData)

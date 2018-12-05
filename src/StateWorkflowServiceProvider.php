@@ -23,7 +23,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
      */
     public function register()
     {
-       // $this->mergeConfigFrom($this->configPath(), 'workflow');
+        $this->mergeConfigFrom($this->configPath(), 'workflow');
 
         $this->app->singleton('stateWorkflow', function () {
             return new WorkflowRegistry($this->app['config']->get('workflow'));
@@ -39,7 +39,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
      */
     protected function configPath()
     {
-        return __DIR__ . '/config/workflow.php';
+        return __DIR__ . '/../config/workflow.php';
     }
 
     /**
@@ -57,7 +57,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
      */
     protected function loadMigrations()
     {
-        $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
     }
 
     /**
