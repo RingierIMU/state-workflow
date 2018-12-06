@@ -61,6 +61,17 @@ trait HasWorkflowTrait
     }
 
     /**
+     * Return object available transitions
+     *
+     * @return array|\Symfony\Component\Workflow\Transition[]
+     * @throws \ReflectionException
+     */
+    public function getEnabledTransition()
+    {
+        return $this->workflow()->getEnabledTransitions($this);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function stateHistory()

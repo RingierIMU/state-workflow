@@ -7,7 +7,7 @@ return [
         'class' => App\User::class,
 
         // property of your object holding the actual state (default is "current_state")
-        'property_path' => 'current_state',
+        //'property_path' => 'current_state', //uncomment this line to override default value
 
         // list of all possible states
         'states' => [

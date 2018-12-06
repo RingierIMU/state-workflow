@@ -1,6 +1,7 @@
 {
     "name": "ringierInternationalMarketplaceUnit/state-workflow",
     "description": "State Management workflow for Laravel",
+    "keywords": ["workflow","state management","laravel"],
     "type": "library",
     "version": "0.0.0",
     "require": {

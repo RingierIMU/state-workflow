@@ -10,8 +10,20 @@ use Symfony\Component\Workflow\Event\GuardEvent as SymfonyGuardEvent;
  */
 class GuardEvent extends BaseEvent
 {
+    /**
+     * GuardEvent constructor.
+     * @param SymfonyGuardEvent $event
+     */
     public function __construct(SymfonyGuardEvent $event)
     {
         $this->originalEvent = $event;
+    }
+
+    /**
+     * @return \Symfony\Component\Workflow\Event\Event|SymfonyGuardEvent
+     */
+    public function getOriginalEvent()
+    {
+        return $this->originalEvent;
     }
 }

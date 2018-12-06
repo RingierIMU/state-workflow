@@ -27,6 +27,7 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $transitionName = $event->getTransition()->getName();
 
         event(new GuardEvent($event));
+        $event = new GuardEvent($event);
         event(sprintf('workflow.%s.guard', $workflowName), $event);
         event(sprintf('workflow.%s.guard.%s', $workflowName, $transitionName), $event);
     }
@@ -42,6 +43,7 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $workflowName = $event->getWorkflowName();
 
         event(new LeaveEvent($event));
+        $event = new LeaveEvent($event);
         event(sprintf('workflow.%s.leave', $workflowName), $event);
 
         foreach ($places as $place) {
@@ -60,6 +62,8 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $transitionName = $event->getTransition()->getName();
 
         event(new TransitionEvent($event));
+
+        $event = new TransitionEvent($event);
         event(sprintf('workflow.%s.transition', $workflowName), $event);
         event(sprintf('workflow.%s.transition.%s', $workflowName, $transitionName), $event);
     }
@@ -76,6 +80,7 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $workflowName = $event->getWorkflowName();
 
         event(new EnterEvent($event));
+        $event = new EnterEvent($event);
         event(sprintf('workflow.%s.enter', $workflowName), $event);
 
         foreach ($places as $place) {
@@ -106,6 +111,7 @@ class WorkflowSubscriber implements EventSubscriberInterface
         }
 
         event(new EnteredEvent($event));
+        $event = new EnterEvent($event);
         event(sprintf('workflow.%s.entered', $workflowName), $event);
 
         foreach ($places as $place) {
@@ -124,6 +130,7 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $transitionName = $event->getTransition()->getName();
 
         event(new CompletedEvent($event));
+        $event = new CompletedEvent($event);
         event(sprintf('workflow.%s.completed', $workflowName), $event);
         event(sprintf('workflow.%s.completed.%s', $workflowName, $transitionName), $event);
     }
