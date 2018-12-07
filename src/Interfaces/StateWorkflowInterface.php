@@ -1,8 +1,8 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces;
+<?php namespace Ringierimu\StateWorkflow\Interfaces;
 
 /**
  * Interface StateWorkflowInterface
- * @package RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces
+ * @package Ringierimu\StateWorkflow\Interfaces
  */
 interface StateWorkflowInterface
 {

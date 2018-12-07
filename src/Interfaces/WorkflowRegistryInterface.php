@@ -1,10 +1,10 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces;
+<?php namespace Ringierimu\StateWorkflow\Interfaces;
 
 use Symfony\Component\Workflow\WorkflowInterface;
 
 /**
  * Interface WorkflowRegistryInterface
- * @package RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces
+ * @package Ringierimu\StateWorkflow\Interfaces
  */
 interface WorkflowRegistryInterface
 {

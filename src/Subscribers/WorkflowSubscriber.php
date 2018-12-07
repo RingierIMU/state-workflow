@@ -1,18 +1,18 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Subscribers;
+<?php namespace Ringierimu\StateWorkflow\Subscribers;
 
-use RingierInternationalMarketplaceUnit\StateWorkflow\Events\CompletedEvent;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnteredEvent;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnterEvent;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Events\GuardEvent;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Events\LeaveEvent;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Events\TransitionEvent;
+use Ringierimu\StateWorkflow\Events\CompletedEvent;
+use Ringierimu\StateWorkflow\Events\EnteredEvent;
+use Ringierimu\StateWorkflow\Events\EnterEvent;
+use Ringierimu\StateWorkflow\Events\GuardEvent;
+use Ringierimu\StateWorkflow\Events\LeaveEvent;
+use Ringierimu\StateWorkflow\Events\TransitionEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\Event\GuardEvent as SymfonyGuardEvent;
 
 /**
  * Class WorkflowSubscriber
- * @package RingierInternationalMarketplaceUnit\StateWorkflow\Subscribers
+ * @package Ringierimu\StateWorkflow\Subscribers
  */
 class WorkflowSubscriber implements EventSubscriberInterface
 {

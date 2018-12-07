@@ -1,8 +1,8 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Traits;
+<?php namespace Ringierimu\StateWorkflow\Traits;
 
-use RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces\WorkflowRegistryInterface;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Models\StateWorkflowHistory;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Workflow\StateWorkflow;
+use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
+use Ringierimu\StateWorkflow\Models\StateWorkflowHistory;
+use Ringierimu\StateWorkflow\Workflow\StateWorkflow;
 
 /**
  * Trait HasWorkflowTrait

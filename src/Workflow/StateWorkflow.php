@@ -1,6 +1,6 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Workflow;
+<?php namespace Ringierimu\StateWorkflow\Workflow;
 
-use RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces\StateWorkflowInterface;
+use Ringierimu\StateWorkflow\Interfaces\StateWorkflowInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Workflow\Definition;
@@ -9,7 +9,7 @@ use Symfony\Component\Workflow\Workflow;
 
 /**
  * Class StateWorkflow
- * @package RingierInternationalMarketplaceUnit\StateWorkflow\Workflow
+ * @package Ringierimu\StateWorkflow\Workflow
  */
 class StateWorkflow extends Workflow implements StateWorkflowInterface
 {

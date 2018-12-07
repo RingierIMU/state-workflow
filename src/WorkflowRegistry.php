@@ -1,8 +1,8 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow;
+<?php namespace Ringierimu\StateWorkflow;
 
-use RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces\WorkflowRegistryInterface;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Subscribers\WorkflowSubscriber;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Workflow\StateWorkflow;
+use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
+use Ringierimu\StateWorkflow\Subscribers\WorkflowSubscriber;
+use Ringierimu\StateWorkflow\Workflow\StateWorkflow;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Workflow\Definition;
 use Symfony\Component\Workflow\DefinitionBuilder;
@@ -17,7 +17,7 @@ use Symfony\Component\Workflow\Workflow;
 
 /**
  * Class WorkflowRegistry
- * @package RingierInternationalMarketplaceUnit\StateWorkflow
+ * @package Ringierimu\StateWorkflow
  */
 class WorkflowRegistry implements WorkflowRegistryInterface
 {

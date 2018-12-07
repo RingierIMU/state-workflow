@@ -1,4 +1,4 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Models;
+<?php namespace Ringierimu\StateWorkflow\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  *
  * Class StateWorkflowHistory
- * @package RingierInternationalMarketplaceUnit\StateWorkflow\Models
+ * @package Ringierimu\StateWorkflow\Models
  */
 class StateWorkflowHistory extends Model
 {

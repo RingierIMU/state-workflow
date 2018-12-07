@@ -3,13 +3,13 @@
 namespace Tests {
 
 
-    use RingierInternationalMarketplaceUnit\StateWorkflow\Events\CompletedEvent;
-    use RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnteredEvent;
-    use RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnterEvent;
-    use RingierInternationalMarketplaceUnit\StateWorkflow\Events\GuardEvent;
-    use RingierInternationalMarketplaceUnit\StateWorkflow\Events\LeaveEvent;
-    use RingierInternationalMarketplaceUnit\StateWorkflow\Events\TransitionEvent;
-    use RingierInternationalMarketplaceUnit\StateWorkflow\WorkflowRegistry;
+    use Ringierimu\StateWorkflow\Events\CompletedEvent;
+    use Ringierimu\StateWorkflow\Events\EnteredEvent;
+    use Ringierimu\StateWorkflow\Events\EnterEvent;
+    use Ringierimu\StateWorkflow\Events\GuardEvent;
+    use Ringierimu\StateWorkflow\Events\LeaveEvent;
+    use Ringierimu\StateWorkflow\Events\TransitionEvent;
+    use Ringierimu\StateWorkflow\WorkflowRegistry;
     use Tests\Fixtures\SampleModel;
 
     /**

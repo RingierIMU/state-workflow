@@ -1,5 +1,5 @@
 {
-    "name": "ringierInternationalMarketplaceUnit/state-workflow",
+    "name": "ringierimu/state-workflow",
     "description": "State Management workflow for Laravel",
     "keywords": ["workflow","state management","laravel"],
     "type": "library",
@@ -19,7 +19,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "RingierInternationalMarketplaceUnit\\StateWorkflow\\": "src/"
+            "Ringierimu\\StateWorkflow\\": "src/"
         }
     },
     "autoload-dev": {
@@ -30,7 +30,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "RingierInternationalMarketplaceUnit\\StateWorkflow\\StateWorkflowServiceProvider"
+                "Ringierimu\\StateWorkflow\\StateWorkflowServiceProvider"
             ]
         }
     },

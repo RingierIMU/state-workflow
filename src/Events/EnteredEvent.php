@@ -1,8 +1,8 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Events;
+<?php namespace Ringierimu\StateWorkflow\Events;
 
 /**
  * Class EnteredEvent
- * @package RingierInternationalMarketplaceUnit\StateWorkflow\Events
+ * @package Ringierimu\StateWorkflow\Events
  */
 class EnteredEvent extends BaseEvent
 {

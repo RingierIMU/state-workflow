@@ -1,4 +1,4 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Events;
+<?php namespace Ringierimu\StateWorkflow\Events;
 
 use Symfony\Component\Workflow\Event\GuardEvent as SymfonyGuardEvent;
 
@@ -6,7 +6,7 @@ use Symfony\Component\Workflow\Event\GuardEvent as SymfonyGuardEvent;
  * Validate whether the transition is allowed at all
  *
  * Class GuardEvent
- * @package RingierInternationalMarketplaceUnit\StateWorkflow\Events
+ * @package Ringierimu\StateWorkflow\Events
  */
 class GuardEvent extends BaseEvent
 {

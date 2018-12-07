@@ -1,11 +1,11 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow;
+<?php namespace Ringierimu\StateWorkflow;
 
 use Illuminate\Support\ServiceProvider;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces\WorkflowRegistryInterface;
+use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
 
 /**
  * Class StateWorkflowServiceProvider
- * @package RingierInternationalMarketplaceUnit\StateWorkflow
+ * @package Ringierimu\StateWorkflow
  */
 class StateWorkflowServiceProvider extends ServiceProvider
 {

@@ -1,8 +1,8 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces;
+<?php namespace Ringierimu\StateWorkflow\Interfaces;
 
 /**
  * Interface WorkflowEventSubscriberInterface
- * @package RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces
+ * @package Ringierimu\StateWorkflow\Interfaces
  */
 interface WorkflowEventSubscriberInterface
 {
@@ -11,7 +11,7 @@ interface WorkflowEventSubscriberInterface
      * Register the listeners for the subscriber.
      *
      * $event->listen(
-     *   "RingierInternationalMarketplaceUnit\StateWorkflow\Events\GuardEvent",
+     *   "Ringierimu\StateWorkflow\Events\GuardEvent",
      *   "App\Listeners\UserEventSubscriber@onGuard"
      * );
      * $event->listen(

@@ -1,10 +1,10 @@
-<?php namespace RingierInternationalMarketplaceUnit\StateWorkflow\Events;
+<?php namespace Ringierimu\StateWorkflow\Events;
 
 use Symfony\Component\Workflow\Event\Event;
 
 /**
  * Class BaseEvent
- * @package RingierInternationalMarketplaceUnit\StateWorkflow\Events
+ * @package Ringierimu\StateWorkflow\Events
  */
 abstract class BaseEvent
 {

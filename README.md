@@ -5,17 +5,17 @@ A workflow consist of state and actions to get from one place to another.
 The actions are called transitions which describes how to get from one state to another.
 ## Installation
 ```
-$ composer require RingierInternationalMarketplaceUnit/state-workflow 
+$ composer require ringierimu/state-workflow 
 ```
 
 For Laravel versions lower than 5.5, this step is important after running above script.
 -   Open your config/app.php file and add custom service provider:
 ```php
-RingierInternationalMarketplaceUnit\StateWorkflow\StateWorkflowServiceProvider::class
+Ringierimu\StateWorkflow\StateWorkflowServiceProvider::class
 ```
 Publish `config/workflow.php` file
 ```php
-$ php artisan vendor:publish --provider="RingierInternationalMarketplaceUnit\StateWorkflow\StateWorkflowServiceProvider"
+$ php artisan vendor:publish --provider="Ringierimu\StateWorkflow\StateWorkflowServiceProvider"
 ```
 Run migrations
 ```
@@ -69,7 +69,7 @@ $ php artisan migrate
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Traits\HasWorkflowTrait;
+use Ringierimu\StateWorkflow\Traits\HasWorkflowTrait;
 
 /**
  * Class Post
@@ -107,37 +107,37 @@ During state/workflow transition, the following events are fired:
 1. Validate whether the transition is allowed at all.
 Their event listeners are invoked every time a call to `workflow()->can()`, `workflow()->apply()` or `workflow()->getEnabledTransitions()` is executed.
 ```php
-RingierInternationalMarketplaceUnit\StateWorkflow\Events\GuardEvent
+Ringierimu\StateWorkflow\Events\GuardEvent
 workflow.[workflow name].guard
 workflow.[workflow name].guard.[transition name]
 ```
 2. The subject is about to leave a state
 ```php
-RingierInternationalMarketplaceUnit\StateWorkflow\Events\LeaveEvent
+Ringierimu\StateWorkflow\Events\LeaveEvent
 workflow.[workflow name].leave
 workflow.[workflow name].leave.[state name]
 ```
 3. The subject is going through this transition
 ```php
-RingierInternationalMarketplaceUnit\StateWorkflow\Events\TransitionEvent
+Ringierimu\StateWorkflow\Events\TransitionEvent
 workflow.[workflow name].transition
 workflow.[workflow name].transition.[transition name]
 ```
 4. The subject is about to enter a new state. This event is triggered just before the subject states are updated.
 ```php
-RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnterEvent
+Ringierimu\StateWorkflow\Events\EnterEvent
 workflow.[workflow name].enter
 workflow.[workflow name].enter.[state name]
 ```
 5. The subject has entered in the states and is updated 
 ```php
-RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnteredEvent
+Ringierimu\StateWorkflow\Events\EnteredEvent
 workflow.[workflow name].entered
 workflow.[workflow name].entered.[state name]
 ```
 6. The subject has completed this transition.
 ```php
-RingierInternationalMarketplaceUnit\StateWorkflow\Events\CompletedEvent
+Ringierimu\StateWorkflow\Events\CompletedEvent
 workflow.[workflow name].completed
 workflow.[workflow name].completed.[transition name]
 ```
@@ -171,12 +171,12 @@ Create subscriber class to listen to those events and the class should `implemen
 ```php
 <?php namespace App\Listeners;
 
-use RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnteredEvent;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Events\EnterEvent;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Events\GuardEvent;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Events\LeaveEvent;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Events\TransitionEvent;
-use RingierInternationalMarketplaceUnit\StateWorkflow\Interfaces\WorkflowEventSubscriberInterface;
+use Ringierimu\StateWorkflow\Events\EnteredEvent;
+use Ringierimu\StateWorkflow\Events\EnterEvent;
+use Ringierimu\StateWorkflow\Events\GuardEvent;
+use Ringierimu\StateWorkflow\Events\LeaveEvent;
+use Ringierimu\StateWorkflow\Events\TransitionEvent;
+use Ringierimu\StateWorkflow\Interfaces\WorkflowEventSubscriberInterface;
 use Psr\Log\LoggerInterface;
 
 /**
