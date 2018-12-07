@@ -1,5 +1,8 @@
 # Laravel State workflow
+Implement Symfony Workflow component in Laravel
 
+A workflow consist of state and actions to get from one place to another.
+The actions are called transitions which describes how to get from one state to another.
 ## Installation
 ```
 $ composer require RingierInternationalMarketplaceUnit/state-workflow 
@@ -22,9 +25,9 @@ $ php artisan migrate
 1. Open `config/workflow.php` and configure it
 ```php
 // this should be your model name in camelcase. eg. PropertyListing::Class => propertyListing
-'user' => [
+'post' => [
         // class of your domain object
-        'class' => App\User::class,
+        'class' => \App\Post::class,
 
         // property of your object holding the actual state (default is "current_state")
         //'property_path' => 'current_state', //uncomment this line to override default value
@@ -68,6 +71,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use RingierInternationalMarketplaceUnit\StateWorkflow\Traits\HasWorkflowTrait;
 
+/**
+ * Class Post
+ * @package App
+ */
 class Post extends Model
 {
     use HasWorkflowTrait;
@@ -75,8 +82,27 @@ class Post extends Model
 ```
 
 ## Usage
+### Manage State/Workflow
+```php
+<?php
+use App\Post;
 
-## Fired Event
+$post = new Post();
+
+//Apply transition
+$post->applyTransition("create");
+$post = $post->refresh();
+
+//Return current_state value
+$post->state(); //pending_activation
+
+//Check if this transition is allowed
+$post->canTransition("activate"); // True
+
+//Return Model state history
+$post->stateHistory();
+```
+### Fired Event
 During state/workflow transition, the following events are fired:
 1. Validate whether the transition is allowed at all.
 Their event listeners are invoked every time a call to `workflow()->can()`, `workflow()->apply()` or `workflow()->getEnabledTransitions()` is executed.
@@ -115,7 +141,7 @@ RingierInternationalMarketplaceUnit\StateWorkflow\Events\CompletedEvent
 workflow.[workflow name].completed
 workflow.[workflow name].completed.[transition name]
 ```
-## Subscriber
+### Subscriber
 Open `Providers/EventServiceProvider.php` and register your subscribers
 ```php
 <?php namespace App\Providers;

@@ -6,6 +6,8 @@ use RingierInternationalMarketplaceUnit\StateWorkflow\Workflow\StateWorkflow;
 
 /**
  * Trait HasWorkflowTrait
+ *
+ * @author Norby Baruani <norbyb@roam.africa/>
  */
 trait HasWorkflowTrait
 {
