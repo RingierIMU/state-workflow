@@ -16,4 +16,13 @@ interface WorkflowRegistryInterface
      * @return WorkflowInterface
      */
     public function get($object, $workflowName = null);
+
+    /**
+     * Register workflow subscribers
+     *
+     * @param $class
+     * @param $name
+     * @return void
+     */
+    public function addSubscriber($class, $name);
 }

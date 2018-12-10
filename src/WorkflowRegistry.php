@@ -1,5 +1,9 @@
 <?php namespace Ringierimu\StateWorkflow;
 
+use Exception;
+use Illuminate\Support\Facades\Event;
+use ReflectionClass;
+use Ringierimu\StateWorkflow\Interfaces\WorkflowEventSubscriberInterface;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
 use Ringierimu\StateWorkflow\Subscribers\WorkflowSubscriber;
 use Ringierimu\StateWorkflow\Workflow\StateWorkflow;
@@ -52,6 +56,9 @@ class WorkflowRegistry implements WorkflowRegistryInterface
 
         foreach ($this->config as $name => $workflowData) {
             $this->addWorkflows($name, $workflowData);
+            if (array_key_exists('subscriber', $workflowData)) {
+                $this->addSubscriber($workflowData['subscriber'], $name);
+            }
         }
     }
 
@@ -163,5 +170,27 @@ class WorkflowRegistry implements WorkflowRegistryInterface
         $class = new \ReflectionClass($className);
 
         return $class->newInstanceArgs($arguments);
+    }
+
+    /**
+     * Register workflow subscribers
+     *
+     * @param $class
+     * @param $name
+     * @return void
+     * @throws \ReflectionException
+     * @throws Exception
+     */
+    public function addSubscriber($class, $name)
+    {
+        $reflection = new ReflectionClass($class);
+
+        if (!$reflection->implementsInterface(WorkflowEventSubscriberInterface::class)) {
+            throw new Exception("$class must implements " . WorkflowEventSubscriberInterface::class);
+        }
+
+        if ($reflection->isInstantiable()) {
+            Event::subscribe($reflection->newInstance($name));
+        }
     }
 }

@@ -6,7 +6,6 @@
  */
 interface WorkflowEventSubscriberInterface
 {
-
     /**
      * Register the listeners for the subscriber.
      *
@@ -14,9 +13,10 @@ interface WorkflowEventSubscriberInterface
      *   "Ringierimu\StateWorkflow\Events\GuardEvent",
      *   "App\Listeners\UserEventSubscriber@onGuard"
      * );
+     *
      * $event->listen(
      *   "workflow.user.guard.activate",
-     *   "App\Listeners\UserEventSubscriber@guardActivate"
+     *   "App\Listeners\UserEventSubscriber@onGuardActivate"
      * );
      *
      * @param \Illuminate\Events\Dispatcher $event
