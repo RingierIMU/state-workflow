@@ -1,5 +1,5 @@
 # Laravel State workflow
-Implement Symfony Workflow component in Laravel
+Implement [Symfony Workflow](https://symfony.com/doc/current/components/workflow.html) component in Laravel
 
 A workflow consist of state and actions to get from one place to another.
 The actions are called transitions which describes how to get from one state to another.
@@ -106,46 +106,64 @@ $post->canTransition("activate"); // True
 $post->stateHistory();
 ```
 ### Fired Event
-During state/workflow transition, the following events are fired:
+Each step has three events that are fired in order:
+ - An event for every workflow
+ - An event for the workflow concerned
+ - An event for the workflow concerned with the specific transition or state name  
+
+During state/workflow transition, the following events are fired in the following order:
 1. Validate whether the transition is allowed at all.
-Their event listeners are invoked every time a call to `workflow()->can()`, `workflow()->apply()` or `workflow()->getEnabledTransitions()` is executed.
+Their event listeners are invoked every time a call to 
+`workflow()->can()`, `workflow()->apply()` or `workflow()->getEnabledTransitions()` is executed. `Guard Event`
 ```php
 workflow.guard
 workflow.[workflow name].guard
 workflow.[workflow name].guard.[transition name]
 ```
-2. The subject is about to leave a state
+2. The subject is about to leave a state. `Leave Event`
 ```php
 workflow.leave
 workflow.[workflow name].leave
 workflow.[workflow name].leave.[state name]
 ```
-3. The subject is going through this transition
+3. The subject is going through this transition. `Transition Event`
 ```php
 workflow.transition
 workflow.[workflow name].transition
 workflow.[workflow name].transition.[transition name]
 ```
-4. The subject is about to enter a new state. This event is triggered just before the subject states are updated.
+4. The subject is about to enter a new state.
+This event is triggered just before the subject states are updated. `Enter Event`
 ```php
 workflow.enter
 workflow.[workflow name].enter
 workflow.[workflow name].enter.[state name]
 ```
-5. The subject has entered in the states and is updated 
+5. The subject has entered in the states and is updated. `Entered Event`
 ```php
 workflow.entered
 workflow.[workflow name].entered
 workflow.[workflow name].entered.[state name]
 ```
-6. The subject has completed this transition.
+6. The subject has completed this transition. `Completed Event`
 ```php
 workflow.completed
 workflow.[workflow name].completed
 workflow.[workflow name].completed.[transition name]
 ```
 ### Subscriber
-Create subscriber class to listen to those events and the class should `extends WorkflowSubscriberHandler`
+Create subscriber class to listen to those events and the class should `extends WorkflowSubscriberHandler`.
+
+To register method to listen to specific even within subscriber use the following format for method name:
+- on[Event] - `onGuard()`
+- on[Event][Transition/State name] - `onGuardActivate()`
+    
+NB:
+- Method name must start with `on` key word otherwise it will be ignored.
+- `Subscriber` class must be register inside `workflow.php` config file with the appropriate workflow configuration.
+- `Subscriber` class must extends `WorkflowSubscriberHandler`.
+- `Guard`, `Transition` and `Completed` Event uses of transition name.
+- `Leave`, `Enter` and `Entered` Event uses state name.
 ```php
 <?php namespace App\Listeners;
 
