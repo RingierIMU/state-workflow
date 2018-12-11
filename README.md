@@ -241,3 +241,15 @@ Each workflow event has an instance of `Event`. This means that each event has a
     - `getWorkflowName()`: Returns a string with the name of the workflow that triggered the event.
     - `isBlocked()`: Returns true/false if transition is blocked.
     - `setBlocked()`: Sets the blocked value.
+
+## Artisan Command
+Symfony workflow uses GraphvizDumper to create the workflow image by using the `dot` command.
+The `dot` command is part of [Graphviz](http://www.graphviz.org). 
+
+You will be required to download `dot` command to make use of this command.
+[https://graphviz.gitlab.io/download/](https://graphviz.gitlab.io/download/)
+
+### Usage
+```php
+php artisan workflow:dump workflow_name
+``` 

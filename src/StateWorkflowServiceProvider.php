@@ -1,6 +1,7 @@
 <?php namespace Ringierimu\StateWorkflow;
 
 use Illuminate\Support\ServiceProvider;
+use Ringierimu\StateWorkflow\Console\Commands\StateWorkflowDumpCommand;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
 
 /**
@@ -16,6 +17,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
     {
         $this->publishConfig();
         $this->loadMigrations();
+        $this->registerCommands();
     }
 
     /**
@@ -58,6 +60,16 @@ class StateWorkflowServiceProvider extends ServiceProvider
     protected function loadMigrations()
     {
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+    }
+
+    /**
+     * Register Artisan commands
+     */
+    protected function registerCommands()
+    {
+        $this->commands([
+            StateWorkflowDumpCommand::class
+        ]);
     }
 
     /**
