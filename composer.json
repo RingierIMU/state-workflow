@@ -21,6 +21,9 @@
         }
     ],
     "autoload": {
+        "classmap": [
+            "tests/Fixtures/database/factories"
+        ],
         "psr-4": {
             "Ringierimu\\StateWorkflow\\": "src/"
         }
@@ -35,10 +38,15 @@
             "providers": [
                 "Ringierimu\\StateWorkflow\\StateWorkflowServiceProvider"
             ]
-        }
+        },
+        "include_files": [
+            "tests/Fixtures/Helpers.php"
+        ]
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0 || ^7.0"
+        "phpunit/phpunit": "^6.0 || ^7.0",
+        "orchestra/testbench": "^3.7",
+        "funkjedi/composer-include-files": "^1.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true

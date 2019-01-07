@@ -2,21 +2,13 @@
 
 namespace Tests {
 
-
-    use Ringierimu\StateWorkflow\Events\CompletedEvent;
-    use Ringierimu\StateWorkflow\Events\EnteredEvent;
-    use Ringierimu\StateWorkflow\Events\EnterEvent;
-    use Ringierimu\StateWorkflow\Events\GuardEvent;
-    use Ringierimu\StateWorkflow\Events\LeaveEvent;
-    use Ringierimu\StateWorkflow\Events\TransitionEvent;
     use Ringierimu\StateWorkflow\WorkflowRegistry;
-    use Tests\Fixtures\SampleModel;
 
     /**
      * Class WorkflowSubscriberTest
      * @package Tests
      */
-    class WorkflowSubscriberTest extends \PHPUnit\Framework\TestCase
+    class WorkflowSubscriberTest extends TestCase
     {
 
         /**
@@ -28,76 +20,44 @@ namespace Tests {
             global $events;
             $events = [];
 
-            $workflowRegistry = new WorkflowRegistry($this->getConfig());
-            $model = new SampleModel();
-            $workflow = $workflowRegistry->get($model);
+            $workflowRegistry = new WorkflowRegistry($this->getWorflowConfig());
+            $workflow = $workflowRegistry->get($this->user);
 
-            $workflow->apply($model, 'create');
-            $this->assertCount(21, $events);
+            $workflow->apply($this->user, 'create');
+            $this->assertCount(24, $events);
 
-            $this->assertInstanceOf(GuardEvent::class, $events[0]);
-            $this->assertEquals('workflow.sampleModel.guard', $events[1]);
-            $this->assertEquals('workflow.sampleModel.guard.create', $events[2]);
+            $this->assertEquals('workflow.guard', $events[0]);
+            $this->assertEquals('workflow.user.guard', $events[1]);
+            $this->assertEquals('workflow.user.guard.create', $events[2]);
 
-            $this->assertInstanceOf(LeaveEvent::class, $events[3]);
-            $this->assertEquals('workflow.sampleModel.leave', $events[4]);
-            $this->assertEquals('workflow.sampleModel.leave.new', $events[5]);
+            $this->assertEquals('workflow.leave', $events[3]);
+            $this->assertEquals('workflow.user.leave', $events[4]);
+            $this->assertEquals('workflow.user.leave.new', $events[5]);
 
-            $this->assertInstanceOf(TransitionEvent::class, $events[6]);
-            $this->assertEquals('workflow.sampleModel.transition', $events[7]);
-            $this->assertEquals('workflow.sampleModel.transition.create', $events[8]);
+            $this->assertEquals('workflow.transition', $events[6]);
+            $this->assertEquals('workflow.user.transition', $events[7]);
+            $this->assertEquals('workflow.user.transition.create', $events[8]);
 
-            $this->assertInstanceOf(EnterEvent::class, $events[9]);
-            $this->assertEquals('workflow.sampleModel.enter', $events[10]);
-            $this->assertEquals('workflow.sampleModel.enter.pending_activation', $events[11]);
+            $this->assertEquals('workflow.enter', $events[9]);
+            $this->assertEquals('workflow.user.enter', $events[10]);
+            $this->assertEquals('workflow.user.enter.pending_activation', $events[11]);
 
-            $this->assertInstanceOf(EnteredEvent::class, $events[12]);
-            $this->assertEquals('workflow.sampleModel.entered', $events[13]);
-            $this->assertEquals('workflow.sampleModel.entered.pending_activation', $events[14]);
+            $this->assertEquals('workflow.entered', $events[12]);
+            $this->assertEquals('workflow.user.entered', $events[13]);
+            $this->assertEquals('workflow.user.entered.pending_activation', $events[14]);
 
-            $this->assertInstanceOf(CompletedEvent::class, $events[15]);
-            $this->assertEquals('workflow.sampleModel.completed', $events[16]);
-            $this->assertEquals('workflow.sampleModel.completed.create', $events[17]);
+            $this->assertEquals('workflow.completed', $events[15]);
+            $this->assertEquals('workflow.user.completed', $events[16]);
+            $this->assertEquals('workflow.user.completed.create', $events[17]);
 
-            $this->assertInstanceOf(GuardEvent::class, $events[18]);
-            $this->assertEquals('workflow.sampleModel.guard', $events[19]);
-            $this->assertEquals('workflow.sampleModel.guard.activate', $events[20]);
-        }
+            //Announce model next available transitions events
+            $this->assertEquals('workflow.guard', $events[18]);
+            $this->assertEquals('workflow.user.guard', $events[19]);
+            $this->assertEquals('workflow.user.guard.activate', $events[20]);
 
-        /**
-         * @return array
-         */
-        private function getConfig()
-        {
-            return [
-                // this should be your model name in camelcase. eg. PropertyListing::Class => propertyListing
-                'sampleModel' => [
-                    // class of your domain object
-                    'class' => \Tests\Fixtures\SampleModel::class,
-
-                    // list of all possible states
-                    'states' => [
-                        'new',
-                        'pending_activation',
-                        'activated',
-                        'deleted',
-                        'blocked'
-                    ],
-
-                    // list of all possible transitions
-                    'transitions' => [
-                        'create' => [
-                            'from' => ['new'],
-                            'to' => 'pending_activation',
-                        ],
-                        'activate' => [
-                            'from' => ['pending_activation'],
-                            'to' => 'activated',
-                        ],
-                    ],
-                ],
-            ];
-
+            $this->assertEquals('workflow.guard', $events[21]);
+            $this->assertEquals('workflow.user.guard', $events[22]);
+            $this->assertEquals('workflow.user.guard.block', $events[23]);
         }
     }
 }
@@ -106,9 +66,11 @@ namespace {
 
     $events = null;
 
-    function event($ev)
-    {
-        global $events;
-        $events[] = $ev;
+    if (!function_exists('event')) {
+        function event($ev)
+        {
+            global $events;
+            $events[] = $ev;
+        }
     }
 }

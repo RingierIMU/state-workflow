@@ -13,7 +13,7 @@ use Symfony\Component\Workflow\Event\GuardEvent as SymfonyGuardEvent;
  * Class WorkflowSubscriber
  * @package Ringierimu\StateWorkflow\Subscribers
  *
- * @author Norby Baruani <norby.baruani@roam.africa/>
+ * @author Norby Baruani <norbyb@roam.africa/>
  */
 class WorkflowSubscriber implements EventSubscriberInterface
 {
