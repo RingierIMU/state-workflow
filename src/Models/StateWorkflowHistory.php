@@ -28,11 +28,12 @@ class StateWorkflowHistory extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function model()
     {
-        return $this->belongsTo("$this->model_name");
+        return $this->morphTo();
+
     }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

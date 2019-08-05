@@ -78,7 +78,7 @@ trait HasWorkflowTrait
      */
     public function stateHistory()
     {
-        return $this->hasMany($this->stateHistoryModel, 'model_id', $this->modelPrimaryKey());
+        return $this->morphMany($this->stateHistoryModel, 'model', 'model_name', null, $this->modelPrimaryKey());
     }
 
     /**
@@ -89,10 +89,8 @@ trait HasWorkflowTrait
      */
     public function saveStateHistory(array $transitionData)
     {
-        $this->save();
-
+        $this->save(); //@TODO: why?
         $transitionData[$this->authUserForeignKey()] = $this->authenticatedUserId();
-        $transitionData['model_name'] = get_class();
 
         return $this->stateHistory()->create($transitionData);
     }
