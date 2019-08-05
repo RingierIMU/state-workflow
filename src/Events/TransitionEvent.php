@@ -1,10 +1,10 @@
-<?php namespace Ringierimu\StateWorkflow\Events;
+<?php
+
+namespace Ringierimu\StateWorkflow\Events;
 
 /**
- * Class TransitionEvent
- * @package Ringierimu\StateWorkflow\Events
+ * Class TransitionEvent.
  */
 class TransitionEvent extends BaseEvent
 {
-
 }

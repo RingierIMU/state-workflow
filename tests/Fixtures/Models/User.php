@@ -1,11 +1,12 @@
-<?php namespace Tests\Fixtures\Models;
+<?php
+
+namespace Tests\Fixtures\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Ringierimu\StateWorkflow\Traits\HasWorkflowTrait;
 
 /**
- * Class User
- * @package Tests\Fixtures\Models
+ * Class User.
  */
 class User extends Authenticatable
 {

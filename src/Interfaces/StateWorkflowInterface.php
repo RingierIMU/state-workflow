@@ -1,16 +1,17 @@
-<?php namespace Ringierimu\StateWorkflow\Interfaces;
+<?php
+
+namespace Ringierimu\StateWorkflow\Interfaces;
 
 /**
- * Interface StateWorkflowInterface
- * @package Ringierimu\StateWorkflow\Interfaces
+ * Interface StateWorkflowInterface.
  */
 interface StateWorkflowInterface
 {
-
     /**
-     * Returns the current state
+     * Returns the current state.
      *
      * @param $object
+     *
      * @return mixed
      */
     public function getState($object);

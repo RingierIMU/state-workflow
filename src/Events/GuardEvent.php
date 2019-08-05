@@ -1,17 +1,19 @@
-<?php namespace Ringierimu\StateWorkflow\Events;
+<?php
+
+namespace Ringierimu\StateWorkflow\Events;
 
 use Symfony\Component\Workflow\Event\GuardEvent as SymfonyGuardEvent;
 
 /**
- * Validate whether the transition is allowed at all
+ * Validate whether the transition is allowed at all.
  *
  * Class GuardEvent
- * @package Ringierimu\StateWorkflow\Events
  */
 class GuardEvent extends BaseEvent
 {
     /**
      * GuardEvent constructor.
+     *
      * @param SymfonyGuardEvent $event
      */
     public function __construct(SymfonyGuardEvent $event)

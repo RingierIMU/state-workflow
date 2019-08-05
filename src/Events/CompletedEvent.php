@@ -1,8 +1,9 @@
-<?php namespace Ringierimu\StateWorkflow\Events;
+<?php
+
+namespace Ringierimu\StateWorkflow\Events;
 
 /**
- * Class CompletedEvent
- * @package Ringierimu\StateWorkflow\Events
+ * Class CompletedEvent.
  */
 class CompletedEvent extends BaseEvent
 {

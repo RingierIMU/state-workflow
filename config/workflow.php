@@ -18,26 +18,26 @@ return [
             'pending_activation',
             'activated',
             'deleted',
-            'blocked'
+            'blocked',
         ],
 
         // list of all possible transitions
         'transitions' => [
             'create' => [
                 'from' => 'new',
-                'to' => 'pending_activation',
+                'to'   => 'pending_activation',
             ],
             'activate' => [
                 'from' => 'pending_activation',
-                'to' =>  'activated',
+                'to'   => 'activated',
             ],
             'block' => [
                 'from' => ['pending_activation', 'activated'],
-                'to' => 'blocked'
+                'to'   => 'blocked',
             ],
             'delete' => [
                 'from' => ['pending_activation', 'activated', 'blocked'],
-                'to' =>  'deleted',
+                'to'   => 'deleted',
             ],
         ],
     ],

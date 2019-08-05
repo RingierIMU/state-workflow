@@ -1,19 +1,19 @@
-<?php namespace Ringierimu\StateWorkflow\Subscribers;
+<?php
+
+namespace Ringierimu\StateWorkflow\Subscribers;
 
 use Ringierimu\StateWorkflow\Interfaces\WorkflowEventSubscriberInterface;
 
 /**
- * Class WorkflowSubscriberHandler
+ * Class WorkflowSubscriberHandler.
  *
  * Dynamically register listener for workflow events
  *
- * @package Ringierimu\StateWorkflow\Subscribers
  * @author Norby Baruani <norbyb@roam.africa/>
  */
 abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInterface
 {
-
-    /** @var null  */
+    /** @var null */
     protected $name;
 
     /**
@@ -46,9 +46,9 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
         // get name of instantiated concrete class
         $class = get_called_class();
         // loop through each method of the class
-        foreach(get_class_methods($class) as $method) {
+        foreach (get_class_methods($class) as $method) {
             // if the method name starts with 'on'
-            if(preg_match('/^on/', $method)) {
+            if (preg_match('/^on/', $method)) {
                 // attach the event listener
                 $event->listen($this->key($method), $class.'@'.$method);
             }
@@ -56,7 +56,7 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
     }
 
     /**
-     * Generate event key from Subscriber method to match workflow event dispatcher names
+     * Generate event key from Subscriber method to match workflow event dispatcher names.
      *
      * Format on how to register method to listen to specific workflow events.
      *
@@ -95,6 +95,7 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
      * workflow.[workflow name].entered.[state name]
      *
      * @param $name
+     *
      * @return string
      */
     protected function key($name)
@@ -102,20 +103,22 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
         // remove on from beginning. eg. onGuard => Guard
         $name = ltrim($name, 'on');
         // prepend uppercase letters with . eg. EnteredDeleted => .Entered.Deleted
-        $name = preg_replace_callback('/[A-Z]/', function($m) { return ".{$m[0]}"; }, $name);
-		// remove trailing . eg. .Entered.Deleted => Entered.Deleted
-		$name = ltrim($name, '.');
-		// now that we have the dots we can lowercase the name. eg. Entered.Deleted => entered.deleted
-		$name = strtolower($name);
+        $name = preg_replace_callback('/[A-Z]/', function ($m) {
+            return ".{$m[0]}";
+        }, $name);
+        // remove trailing . eg. .Entered.Deleted => Entered.Deleted
+        $name = ltrim($name, '.');
+        // now that we have the dots we can lowercase the name. eg. Entered.Deleted => entered.deleted
+        $name = strtolower($name);
 
-		$segments = explode('.', $name);
+        $segments = explode('.', $name);
 
-		// add underscore for transition with underscore name
-		if (count($segments) > 2) {
-		    $transition = $segments[0];
-		    unset($segments[0]);
-		    $flow = implode('_', $segments);
-		    $name = $transition . "." . $flow;
+        // add underscore for transition with underscore name
+        if (count($segments) > 2) {
+            $transition = $segments[0];
+            unset($segments[0]);
+            $flow = implode('_', $segments);
+            $name = $transition.'.'.$flow;
         }
 
         return sprintf('workflow.%s.%s', $this->name, $name);

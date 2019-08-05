@@ -5,14 +5,13 @@ namespace Tests {
     use Ringierimu\StateWorkflow\WorkflowRegistry;
 
     /**
-     * Class WorkflowSubscriberTest
-     * @package Tests
+     * Class WorkflowSubscriberTest.
      */
     class WorkflowSubscriberTest extends TestCase
     {
-
         /**
          * @test
+         *
          * @throws \ReflectionException
          */
         public function if_workflow_subscriber_emit_events()

@@ -1,4 +1,6 @@
-<?php namespace Ringierimu\StateWorkflow\Workflow;
+<?php
+
+namespace Ringierimu\StateWorkflow\Workflow;
 
 use Ringierimu\StateWorkflow\Interfaces\StateWorkflowInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -8,8 +10,7 @@ use Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface;
 use Symfony\Component\Workflow\Workflow;
 
 /**
- * Class StateWorkflow
- * @package Ringierimu\StateWorkflow\Workflow
+ * Class StateWorkflow.
  */
 class StateWorkflow extends Workflow implements StateWorkflowInterface
 {
@@ -18,11 +19,12 @@ class StateWorkflow extends Workflow implements StateWorkflowInterface
 
     /**
      * StateWorkflow constructor.
-     * @param Definition $definition
-     * @param MarkingStoreInterface|null $markingStore
+     *
+     * @param Definition                    $definition
+     * @param MarkingStoreInterface|null    $markingStore
      * @param EventDispatcherInterface|null $dispatcher
-     * @param string $name
-     * @param array $config
+     * @param string                        $name
+     * @param array                         $config
      */
     public function __construct(
         array $config,
@@ -36,15 +38,17 @@ class StateWorkflow extends Workflow implements StateWorkflowInterface
     }
 
     /**
-     * Returns the current state
+     * Returns the current state.
      *
      * @param $object
+     *
      * @return mixed
      */
     public function getState($object)
     {
         $accessor = new PropertyAccessor();
         $propertyPath = isset($this->config['property_path']) ? $this->config['property_path'] : 'current_state';
+
         return $accessor->getValue($object, $propertyPath);
     }
 }
