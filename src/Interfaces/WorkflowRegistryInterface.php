@@ -1,27 +1,30 @@
-<?php namespace Ringierimu\StateWorkflow\Interfaces;
+<?php
+
+namespace Ringierimu\StateWorkflow\Interfaces;
 
 use Symfony\Component\Workflow\WorkflowInterface;
 
 /**
- * Interface WorkflowRegistryInterface
- * @package Ringierimu\StateWorkflow\Interfaces
+ * Interface WorkflowRegistryInterface.
  */
 interface WorkflowRegistryInterface
 {
     /**
-     * Returns SateWorkflow
+     * Returns SateWorkflow.
      *
      * @param object $object
-     * @param null $workflowName
+     * @param null   $workflowName
+     *
      * @return WorkflowInterface
      */
     public function get($object, $workflowName = null);
 
     /**
-     * Register workflow subscribers
+     * Register workflow subscribers.
      *
      * @param $class
      * @param $name
+     *
      * @return void
      */
     public function addSubscriber($class, $name);

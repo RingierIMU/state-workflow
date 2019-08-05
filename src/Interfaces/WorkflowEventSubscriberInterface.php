@@ -1,8 +1,9 @@
-<?php namespace Ringierimu\StateWorkflow\Interfaces;
+<?php
+
+namespace Ringierimu\StateWorkflow\Interfaces;
 
 /**
- * Interface WorkflowEventSubscriberInterface
- * @package Ringierimu\StateWorkflow\Interfaces
+ * Interface WorkflowEventSubscriberInterface.
  */
 interface WorkflowEventSubscriberInterface
 {

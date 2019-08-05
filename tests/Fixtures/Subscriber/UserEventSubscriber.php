@@ -1,5 +1,6 @@
-<?php namespace Tests\Fixtures\Subscriber;
+<?php
 
+namespace Tests\Fixtures\Subscriber;
 
 use Illuminate\Support\Facades\Log;
 use Ringierimu\StateWorkflow\Events\CompletedEvent;
@@ -11,8 +12,7 @@ use Ringierimu\StateWorkflow\Events\TransitionEvent;
 use Ringierimu\StateWorkflow\Subscribers\WorkflowSubscriberHandler;
 
 /**
- * Class UserEventSubscriber
- * @package Tests\Fixtures\Subscriber
+ * Class UserEventSubscriber.
  */
 class UserEventSubscriber extends WorkflowSubscriberHandler
 {
@@ -24,10 +24,10 @@ class UserEventSubscriber extends WorkflowSubscriberHandler
         Log::info(__METHOD__);
 
         //$event->getOriginalEvent()->setBlocked(true);
-        Log::info("workflow name: " . $event->getOriginalEvent()->getWorkflowName());
-        Log::info("transition name: " .$event->getOriginalEvent()->getTransition()->getName());
-        Log::info("froms: " . implode(",", $event->getOriginalEvent()->getTransition()->getFroms()));
-        Log::info("tos: " . implode(",", $event->getOriginalEvent()->getTransition()->getTos()));
+        Log::info('workflow name: '.$event->getOriginalEvent()->getWorkflowName());
+        Log::info('transition name: '.$event->getOriginalEvent()->getTransition()->getName());
+        Log::info('froms: '.implode(',', $event->getOriginalEvent()->getTransition()->getFroms()));
+        Log::info('tos: '.implode(',', $event->getOriginalEvent()->getTransition()->getTos()));
     }
 
     /**
@@ -37,10 +37,10 @@ class UserEventSubscriber extends WorkflowSubscriberHandler
     {
         Log::info(__METHOD__);
 
-        Log::info("workflow name: " . $event->getOriginalEvent()->getWorkflowName());
-        Log::info("transition name: " .$event->getOriginalEvent()->getTransition()->getName());
-        Log::info("froms: " . implode(",", $event->getOriginalEvent()->getTransition()->getFroms()));
-        Log::info("tos: " . implode(",", $event->getOriginalEvent()->getTransition()->getTos()));
+        Log::info('workflow name: '.$event->getOriginalEvent()->getWorkflowName());
+        Log::info('transition name: '.$event->getOriginalEvent()->getTransition()->getName());
+        Log::info('froms: '.implode(',', $event->getOriginalEvent()->getTransition()->getFroms()));
+        Log::info('tos: '.implode(',', $event->getOriginalEvent()->getTransition()->getTos()));
     }
 
     /**
@@ -95,10 +95,10 @@ class UserEventSubscriber extends WorkflowSubscriberHandler
     {
         Log::info(__METHOD__);
 
-        Log::info("workflow name: " . $event->getOriginalEvent()->getWorkflowName());
-        Log::info("transition name: " .$event->getOriginalEvent()->getTransition()->getName());
-        Log::info("froms: " . implode(",", $event->getOriginalEvent()->getTransition()->getFroms()));
-        Log::info("tos: " . implode(",", $event->getOriginalEvent()->getTransition()->getTos()));
+        Log::info('workflow name: '.$event->getOriginalEvent()->getWorkflowName());
+        Log::info('transition name: '.$event->getOriginalEvent()->getTransition()->getName());
+        Log::info('froms: '.implode(',', $event->getOriginalEvent()->getTransition()->getFroms()));
+        Log::info('tos: '.implode(',', $event->getOriginalEvent()->getTransition()->getTos()));
     }
 
     /**

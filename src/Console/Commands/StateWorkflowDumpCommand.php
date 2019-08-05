@@ -1,4 +1,6 @@
-<?php namespace Ringierimu\StateWorkflow\Console\Commands;
+<?php
+
+namespace Ringierimu\StateWorkflow\Console\Commands;
 
 use Exception;
 use Illuminate\Console\Command;
@@ -8,11 +10,10 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Workflow\Dumper\GraphvizDumper;
 
 /**
- * Class StateWorkflowDumpCommand
+ * Class StateWorkflowDumpCommand.
  *
  * Symfony dump workflow https://symfony.com/doc/current/workflow/dumping-workflows.html
  *
- * @package Ringierimu\StateWorkflow\Console\Commands
  *
  * @author Norby Baruani <norbyb@roam.africa/>
  */
@@ -23,16 +24,16 @@ class StateWorkflowDumpCommand extends Command
      *
      * @var string
      */
-    protected $signature = "workflow:dump
+    protected $signature = 'workflow:dump
                             {workflow : name of workflow from configuration}
-                            {--format=png : the image format}";
+                            {--format=png : the image format}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = "Dumps a State Workflow as a graphviz file using GraphvizDumper.";
+    protected $description = 'Dumps a State Workflow as a graphviz file using GraphvizDumper.';
 
     /**
      * @throws \ReflectionException
@@ -40,9 +41,9 @@ class StateWorkflowDumpCommand extends Command
      */
     public function handle()
     {
-        $workflowName   = $this->argument('workflow');
-        $format         = $this->option('format');
-        $config         = Config::get('workflow');
+        $workflowName = $this->argument('workflow');
+        $format = $this->option('format');
+        $config = Config::get('workflow');
 
         if (!isset($config[$workflowName])) {
             throw new Exception("Workflow $workflowName is not configured. Make sure it is configured correctly on the config file.");
@@ -62,7 +63,7 @@ class StateWorkflowDumpCommand extends Command
         }
 
         /** @var StateWorkflow $workflow */
-        $workflow   = $model->workflow();
+        $workflow = $model->workflow();
         $definition = $workflow->getDefinition();
 
         $dumper = new GraphvizDumper();

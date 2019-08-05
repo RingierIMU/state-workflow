@@ -1,8 +1,9 @@
-<?php namespace Ringierimu\StateWorkflow\Events;
+<?php
+
+namespace Ringierimu\StateWorkflow\Events;
 
 /**
- * Class EnterEvent
- * @package Ringierimu\StateWorkflow\Events
+ * Class EnterEvent.
  */
 class EnterEvent extends BaseEvent
 {

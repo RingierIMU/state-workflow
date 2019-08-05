@@ -1,10 +1,11 @@
-<?php namespace Ringierimu\StateWorkflow\Events;
+<?php
+
+namespace Ringierimu\StateWorkflow\Events;
 
 use Symfony\Component\Workflow\Event\Event;
 
 /**
- * Class BaseEvent
- * @package Ringierimu\StateWorkflow\Events
+ * Class BaseEvent.
  */
 abstract class BaseEvent
 {
@@ -15,6 +16,7 @@ abstract class BaseEvent
 
     /**
      * BaseEvent constructor.
+     *
      * @param Event $event
      */
     public function __construct(Event $event)
@@ -23,7 +25,8 @@ abstract class BaseEvent
     }
 
     /**
-     * Return the original event
+     * Return the original event.
+     *
      * @return Event
      */
     public function getOriginalEvent()

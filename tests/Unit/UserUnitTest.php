@@ -8,14 +8,12 @@ use Tests\Fixtures\Models\User;
 use Tests\TestCase;
 
 /**
- * Class UserTest
- * @package Tests\Unit
+ * Class UserTest.
  */
-class UserTest extends TestCase
+class UserUnitTest extends TestCase
 {
     /** @var User */
     protected $user;
-
 
     public function setUp()
     {
@@ -32,6 +30,7 @@ class UserTest extends TestCase
 
     /**
      * @test
+     *
      * @throws \ReflectionException
      */
     public function it_return_workflow_instance()
@@ -40,9 +39,10 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test current state to be new
+     * Test current state to be new.
      *
      * @test
+     *
      * @throws \ReflectionException
      */
     public function is_current_state_new()
@@ -51,9 +51,10 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test if transition can be applied or not
+     * Test if transition can be applied or not.
      *
      * @test
+     *
      * @throws \ReflectionException
      */
     public function can_apply_transition()
@@ -63,9 +64,10 @@ class UserTest extends TestCase
     }
 
     /**
-     * Test invalid transition
+     * Test invalid transition.
      *
      * @test
+     *
      * @throws \ReflectionException
      */
     public function invalid_transition_throws_exception()
@@ -76,9 +78,10 @@ class UserTest extends TestCase
     }
 
     /**
-     * Change Model states by applying transitions
+     * Change Model states by applying transitions.
      *
      * @test
+     *
      * @throws \ReflectionException
      */
     public function apply_transitions()

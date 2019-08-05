@@ -1,4 +1,6 @@
-<?php namespace Ringierimu\StateWorkflow;
+<?php
+
+namespace Ringierimu\StateWorkflow;
 
 use Exception;
 use Illuminate\Support\Facades\Event;
@@ -20,8 +22,7 @@ use Symfony\Component\Workflow\Transition;
 use Symfony\Component\Workflow\Workflow;
 
 /**
- * Class WorkflowRegistry
- * @package Ringierimu\StateWorkflow
+ * Class WorkflowRegistry.
  */
 class WorkflowRegistry implements WorkflowRegistryInterface
 {
@@ -42,7 +43,9 @@ class WorkflowRegistry implements WorkflowRegistryInterface
 
     /**
      * WorkflowRegistry constructor.
+     *
      * @param array $config
+     *
      * @throws \ReflectionException
      */
     public function __construct(array $config)
@@ -63,7 +66,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function get($subject, $workflowName = null)
     {
@@ -71,7 +74,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     }
 
     /**
-     * Add a workflow to the subject
+     * Add a workflow to the subject.
      *
      * @param StateWorkflow $workflow
      * @param $supportStrategy
@@ -82,10 +85,11 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     }
 
     /**
-     * Add a workflow to the registry from array
+     * Add a workflow to the registry from array.
      *
      * @param $name
      * @param array $workflowData
+     *
      * @throws \ReflectionException
      */
     public function addWorkflows($name, array $workflowData)
@@ -97,7 +101,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
                 $transitionName = $transition['name'];
             }
 
-            foreach ((array)$transition['from'] as $form) {
+            foreach ((array) $transition['from'] as $form) {
                 $builder->addTransition(new Transition($transitionName, $form, $transition['to']));
             }
         }
@@ -110,12 +114,13 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     }
 
     /**
-     * Return the workflow instance
+     * Return the workflow instance.
      *
      * @param $name
-     * @param array $workflowData
-     * @param Definition $definition
+     * @param array                 $workflowData
+     * @param Definition            $definition
      * @param MarkingStoreInterface $markingStore
+     *
      * @return mixed
      */
     protected function getWorkflowInstance(
@@ -131,7 +136,8 @@ class WorkflowRegistry implements WorkflowRegistryInterface
 
     /**
      * @param array $workflowData
-     * @param bool $override
+     * @param bool  $override
+     *
      * @return mixed|string
      */
     private function getWorkflowClass(array $workflowData, $override = true)
@@ -148,11 +154,13 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     }
 
     /**
-     * Return the making store instance
+     * Return the making store instance.
      *
      * @param array $workflowData
-     * @return object|MarkingStoreInterface
+     *
      * @throws \ReflectionException
+     *
+     * @return object|MarkingStoreInterface
      */
     protected function getMarkingStoreInstance(array $workflowData)
     {
@@ -173,20 +181,22 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     }
 
     /**
-     * Register workflow subscribers
+     * Register workflow subscribers.
      *
      * @param $class
      * @param $name
-     * @return void
+     *
      * @throws \ReflectionException
      * @throws Exception
+     *
+     * @return void
      */
     public function addSubscriber($class, $name)
     {
         $reflection = new ReflectionClass($class);
 
         if (!$reflection->implementsInterface(WorkflowEventSubscriberInterface::class)) {
-            throw new Exception("$class must implements " . WorkflowEventSubscriberInterface::class);
+            throw new Exception("$class must implements ".WorkflowEventSubscriberInterface::class);
         }
 
         if ($reflection->isInstantiable()) {

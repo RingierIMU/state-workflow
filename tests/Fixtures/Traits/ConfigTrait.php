@@ -1,8 +1,9 @@
-<?php namespace Tests\Fixtures\Traits;
+<?php
+
+namespace Tests\Fixtures\Traits;
 
 /**
- * Trait ConfigTrait
- * @package Tests\Fixtures\Traits
+ * Trait ConfigTrait.
  */
 trait ConfigTrait
 {
@@ -29,26 +30,26 @@ trait ConfigTrait
                     'pending_activation',
                     'activated',
                     'deleted',
-                    'blocked'
+                    'blocked',
                 ],
 
                 // list of all possible transitions
                 'transitions' => [
                     'create' => [
                         'from' => 'new',
-                        'to' => 'pending_activation',
+                        'to'   => 'pending_activation',
                     ],
                     'activate' => [
                         'from' => 'pending_activation',
-                        'to' =>  'activated',
+                        'to'   => 'activated',
                     ],
                     'block' => [
                         'from' => ['pending_activation', 'activated'],
-                        'to' => 'blocked'
+                        'to'   => 'blocked',
                     ],
                     'delete' => [
                         'from' => ['activated', 'blocked'],
-                        'to' =>  'deleted',
+                        'to'   => 'deleted',
                     ],
                 ],
             ],
