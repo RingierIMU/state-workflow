@@ -1,10 +1,15 @@
 <?php
 
 return [
+
+    'setup' => [
+        'user_class' => \App\User::class,
+    ],
+
     // this should be your model name in camelcase. eg. PropertyListing::Class => propertyListing
     'user' => [
         // class of your domain object
-        'class' => App\User::class,
+        'class' => \App\User::class,
 
         // Register subscriber for this workflow which contains business rules. Uncomment line below to register subscriber
         //'subscriber' => \App\Listeners\UserEventSubscriber::class,

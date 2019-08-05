@@ -29,7 +29,11 @@ class StateWorkflowServiceProvider extends ServiceProvider
         $this->mergeConfigFrom($this->configPath(), 'workflow');
 
         $this->app->singleton('stateWorkflow', function () {
-            return new WorkflowRegistry($this->app['config']->get('workflow'));
+            return new WorkflowRegistry(
+                collect($this->app['config']->get('workflow'))
+                    ->except('setup')
+                    ->toArray()
+            );
         });
 
         $this->app->alias('stateWorkflow', WorkflowRegistryInterface::class);
