@@ -97,7 +97,6 @@ trait HasWorkflowTrait
      */
     public function saveStateHistory(array $transitionData)
     {
-        $this->save(); //@TODO: why?
         $transitionData[$this->authUserForeignKey()] = $this->authenticatedUserId();
 
         return $this->stateHistory()->create($transitionData);
