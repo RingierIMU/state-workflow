@@ -1,11 +1,13 @@
-<?php namespace Ringierimu\StateWorkflow\Traits;
+<?php
+
+namespace Ringierimu\StateWorkflow\Traits;
 
 use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
 use Ringierimu\StateWorkflow\Models\StateWorkflowHistory;
 use Ringierimu\StateWorkflow\Workflow\StateWorkflow;
 
 /**
- * Trait HasWorkflowTrait
+ * Trait HasWorkflowTrait.
  *
  * @author Norby Baruani <norbyb@roam.africa/>
  */
@@ -20,27 +22,30 @@ trait HasWorkflowTrait
     protected $context = [];
 
     /**
-     * Model to save model change history from one state to another
+     * Model to save model change history from one state to another.
      *
      * @var string
      */
     private $stateHistoryModel = StateWorkflowHistory::class;
 
     /**
-     * @return StateWorkflow
      * @throws \ReflectionException
+     *
+     * @return StateWorkflow
      */
     public function workflow()
     {
         if (!$this->workflow) {
             $this->workflow = app(WorkflowRegistryInterface::class)->get($this, $this->configName());
         }
+
         return $this->workflow;
     }
 
     /**
-     * @return mixed
      * @throws \ReflectionException
+     *
+     * @return mixed
      */
     public function state()
     {
@@ -50,19 +55,24 @@ trait HasWorkflowTrait
     /**
      * @param $transition
      * @param array $context
-     * @return \Symfony\Component\Workflow\Marking
+     *
      * @throws \ReflectionException
+     *
+     * @return \Symfony\Component\Workflow\Marking
      */
     public function applyTransition($transition, $context = [])
     {
         $this->context = $context;
+
         return $this->workflow()->apply($this, $transition);
     }
 
     /**
      * @param $transition
-     * @return bool
+     *
      * @throws \ReflectionException
+     *
+     * @return bool
      */
     public function canTransition($transition)
     {
@@ -70,10 +80,11 @@ trait HasWorkflowTrait
     }
 
     /**
-     * Return object available transitions
+     * Return object available transitions.
+     *
+     * @throws \ReflectionException
      *
      * @return array|\Symfony\Component\Workflow\Transition[]
-     * @throws \ReflectionException
      */
     public function getEnabledTransition()
     {
@@ -89,9 +100,10 @@ trait HasWorkflowTrait
     }
 
     /**
-     * Save Model changes and log changes to StateHistory table
+     * Save Model changes and log changes to StateHistory table.
      *
      * @param array $transitionData
+     *
      * @return \Illuminate\Database\Eloquent\Model
      */
     public function saveStateHistory(array $transitionData)
@@ -102,7 +114,7 @@ trait HasWorkflowTrait
     }
 
     /**
-     * Return authenticated user id
+     * Return authenticated user id.
      *
      * @return int|null
      */
@@ -112,10 +124,11 @@ trait HasWorkflowTrait
     }
 
     /**
-     * Model configuration name on config/workflow.php
+     * Model configuration name on config/workflow.php.
+     *
+     * @throws \ReflectionException
      *
      * @return string
-     * @throws \ReflectionException
      */
     public function configName()
     {

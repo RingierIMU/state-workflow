@@ -1,4 +1,6 @@
-<?php namespace Ringierimu\StateWorkflow\Subscribers;
+<?php
+
+namespace Ringierimu\StateWorkflow\Subscribers;
 
 use Ringierimu\StateWorkflow\Events\CompletedEvent;
 use Ringierimu\StateWorkflow\Events\EnterEvent;
@@ -10,21 +12,20 @@ use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\Event\GuardEvent as SymfonyGuardEvent;
 
 /**
- * Class WorkflowSubscriber
- * @package Ringierimu\StateWorkflow\Subscribers
+ * Class WorkflowSubscriber.
  *
  * @author Norby Baruani <norbyb@roam.africa/>
  */
 class WorkflowSubscriber implements EventSubscriberInterface
 {
     /**
-     * Validate whether the transition is allowed at all
+     * Validate whether the transition is allowed at all.
      *
      * @param SymfonyGuardEvent $event
      */
     public function guardEvent(SymfonyGuardEvent $event)
     {
-        $workflowName   = $event->getWorkflowName();
+        $workflowName = $event->getWorkflowName();
         $transitionName = $event->getTransition()->getName();
 
         $event = new GuardEvent($event);
@@ -40,7 +41,7 @@ class WorkflowSubscriber implements EventSubscriberInterface
      */
     public function leaveEvent(Event $event)
     {
-        $places       = $event->getTransition()->getFroms();
+        $places = $event->getTransition()->getFroms();
         $workflowName = $event->getWorkflowName();
 
         $event = new LeaveEvent($event);
@@ -53,13 +54,13 @@ class WorkflowSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * The subject is going through this transition
+     * The subject is going through this transition.
      *
      * @param Event $event
      */
     public function transitionEvent(Event $event)
     {
-        $workflowName   = $event->getWorkflowName();
+        $workflowName = $event->getWorkflowName();
         $transitionName = $event->getTransition()->getName();
 
         $event = new TransitionEvent($event);
@@ -76,7 +77,7 @@ class WorkflowSubscriber implements EventSubscriberInterface
      */
     public function enterEvent(Event $event)
     {
-        $places       = $event->getTransition()->getTos();
+        $places = $event->getTransition()->getTos();
         $workflowName = $event->getWorkflowName();
 
         $event = new EnterEvent($event);
@@ -95,19 +96,19 @@ class WorkflowSubscriber implements EventSubscriberInterface
      */
     public function enteredEvent(Event $event)
     {
-        $places       = $event->getTransition()->getTos();
+        $places = $event->getTransition()->getTos();
         $workflowName = $event->getWorkflowName();
 
-        $from = implode(",", $event->getTransition()->getFroms());
-        $to = implode(",", $event->getTransition()->getTos());
+        $from = implode(',', $event->getTransition()->getFroms());
+        $to = implode(',', $event->getTransition()->getTos());
         $model = $event->getSubject();
 
         if (method_exists($model, 'saveStateHistory')) {
             $model->saveStateHistory([
                 'transition' => $event->getTransition()->getName(),
-                'from' => $from,
-                'to' => $to,
-                'context' => method_exists($model, 'getContext') ? $model->getContext() : []
+                'from'       => $from,
+                'to'         => $to,
+                'context'    => method_exists($model, 'getContext') ? $model->getContext() : [],
             ]);
         }
 
@@ -127,7 +128,7 @@ class WorkflowSubscriber implements EventSubscriberInterface
      */
     public function completedEvent(Event $event)
     {
-        $workflowName   = $event->getWorkflowName();
+        $workflowName = $event->getWorkflowName();
         $transitionName = $event->getTransition()->getName();
 
         $event = new CompletedEvent($event);
