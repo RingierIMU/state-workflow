@@ -1,11 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateStateWorkflowHistoryTable
+ * Class CreateStateWorkflowHistoryTable.
  */
 class CreateStateWorkflowHistoriesTable extends Migration
 {
@@ -24,6 +24,7 @@ class CreateStateWorkflowHistoriesTable extends Migration
             $table->string('from');
             $table->string('to');
             $table->integer('user_id')->index();
+            $table->json('context');
             $table->timestamps();
         });
     }

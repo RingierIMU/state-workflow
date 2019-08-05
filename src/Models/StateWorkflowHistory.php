@@ -1,4 +1,6 @@
-<?php namespace Ringierimu\StateWorkflow\Models;
+<?php
+
+namespace Ringierimu\StateWorkflow\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $user_id
  *
  * Class StateWorkflowHistory
- * @package Ringierimu\StateWorkflow\Models
  */
 class StateWorkflowHistory extends Model
 {
@@ -24,16 +25,25 @@ class StateWorkflowHistory extends Model
         'transition',
         'from',
         'to',
-        'user_id'
+        'context',
+        'user_id',
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @var array
+     */
+    protected $casts = [
+        'context' => 'array',
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function model()
     {
-        return $this->belongsTo("$this->model_name");
+        return $this->morphTo();
     }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
