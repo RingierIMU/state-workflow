@@ -104,9 +104,10 @@ class WorkflowSubscriber implements EventSubscriberInterface
 
         if (method_exists($model, 'saveStateHistory')) {
             $model->saveStateHistory([
-                "transition" => $event->getTransition()->getName(),
-                "from" => $from,
-                "to" => $to
+                'transition' => $event->getTransition()->getName(),
+                'from' => $from,
+                'to' => $to,
+                'context' => method_exists($model, 'getContext') ? $model->getContext() : []
             ]);
         }
 

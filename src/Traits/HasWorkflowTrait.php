@@ -1,5 +1,6 @@
 <?php namespace Ringierimu\StateWorkflow\Traits;
 
+use Illuminate\Support\Facades\Log;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
 use Ringierimu\StateWorkflow\Models\StateWorkflowHistory;
 use Ringierimu\StateWorkflow\Workflow\StateWorkflow;
@@ -13,6 +14,11 @@ trait HasWorkflowTrait
 {
     /** @var StateWorkflow */
     protected $workflow;
+
+    /**
+     * @var array
+     */
+    protected $context = [];
 
     /**
      * Model to save model change history from one state to another
@@ -44,11 +50,13 @@ trait HasWorkflowTrait
 
     /**
      * @param $transition
+     * @param array $context
      * @return \Symfony\Component\Workflow\Marking
      * @throws \ReflectionException
      */
-    public function applyTransition($transition)
+    public function applyTransition($transition, $context = [])
     {
+        $this->context = $context;
         return $this->workflow()->apply($this, $transition);
     }
 
@@ -130,5 +138,13 @@ trait HasWorkflowTrait
     public function modelPrimaryKey()
     {
         return 'id';
+    }
+
+    /**
+     * @return array
+     */
+    public function getContext()
+    {
+        return $this->context;
     }
 }

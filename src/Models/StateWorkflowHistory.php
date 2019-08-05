@@ -24,9 +24,16 @@ class StateWorkflowHistory extends Model
         'transition',
         'from',
         'to',
+        'context',
         'user_id'
     ];
 
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'context' => 'array'
+    ];
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */

@@ -24,6 +24,7 @@ class CreateStateWorkflowHistoriesTestTable extends Migration
             $table->string('from');
             $table->string('to');
             $table->integer('user_id')->index();
+            $table->json('context');
             $table->timestamps();
         });
     }
