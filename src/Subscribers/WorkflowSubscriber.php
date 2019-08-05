@@ -102,6 +102,7 @@ class WorkflowSubscriber implements EventSubscriberInterface
         $from = implode(',', $event->getTransition()->getFroms());
         $to = implode(',', $event->getTransition()->getTos());
         $model = $event->getSubject();
+        $model->save();
 
         if (method_exists($model, 'saveStateHistory')) {
             $model->saveStateHistory([
