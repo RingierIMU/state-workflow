@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Fixtures\Models;
+namespace Ringierimu\StateWorkflow\Tests\Fixtures\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Ringierimu\StateWorkflow\Traits\HasWorkflowTrait;

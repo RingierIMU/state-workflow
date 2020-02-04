@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests {
+namespace Ringierimu\StateWorkflow\Tests {
 
     use Ringierimu\StateWorkflow\WorkflowRegistry;
 

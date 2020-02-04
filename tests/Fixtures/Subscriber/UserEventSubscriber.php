@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Fixtures\Subscriber;
+namespace Ringierimu\StateWorkflow\Tests\Fixtures\Subscriber;
 
 use Illuminate\Support\Facades\Log;
 use Ringierimu\StateWorkflow\Events\CompletedEvent;
