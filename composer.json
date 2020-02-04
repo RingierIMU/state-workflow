@@ -6,11 +6,11 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": ">=5.6.4",
-        "symfony/workflow": "^3.3 || ^4.0 || ^4.1",
-        "illuminate/support": "^5.3 || ^5.4 || ^5.5 || ^5.6 || ^5.7",
-        "symfony/event-dispatcher": "^3.3 || ^4.0 || ^4.2",
-        "illuminate/events": "^5.3 || ^5.4 || ^5.5 || ^5.6 || ^5.7"
+        "php": ">=7.2",
+        "symfony/workflow": "^3.3 || ^4.0",
+        "illuminate/support": "^5.3 || ^6.0",
+        "symfony/event-dispatcher": "^3.3 || ^4.0",
+        "illuminate/events": "^5.3 || ^6.0"
     },
     "authors": [
         {
@@ -43,8 +43,8 @@
         ]
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0 || ^7.0",
-        "orchestra/testbench": "^3.7",
+        "phpunit/phpunit": "^8.0",
+        "orchestra/testbench": "^3.7 || ^4.0",
         "funkjedi/composer-include-files": "^1.0"
     },
     "minimum-stability": "dev",
