@@ -43,15 +43,15 @@
     "autoload": {
         "psr-4": {
             "Ringierimu\\StateWorkflow\\": "src/"
-        },
-        "classmap": [
-            "tests/Fixtures/database/factories"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
             "Ringierimu\\StateWorkflow\\Tests\\": "tests/"
-        }
+        },
+        "classmap": [
+            "tests/Fixtures/database/factories"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true
