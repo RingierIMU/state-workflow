@@ -46,7 +46,9 @@ class StateWorkflowDumpCommand extends Command
         $config = Config::get('workflow');
 
         if (!isset($config[$workflowName])) {
-            throw new Exception("Workflow $workflowName is not configured. Make sure it is configured correctly on the config file.");
+            throw new Exception(
+                "Workflow $workflowName is not configured. Make sure it is configured correctly on the config file."
+            );
         }
 
         if (!$config[$workflowName]['class']) {
@@ -59,7 +61,9 @@ class StateWorkflowDumpCommand extends Command
         $model = $ref->newInstance();
 
         if (!method_exists($model, 'workflow')) {
-            throw new Exception("Class $class does not support State Workflow. Make sure Class is configured correctly");
+            throw new Exception(
+                "Class $class does not support State Workflow. Make sure Class is configured correctly"
+            );
         }
 
         /** @var StateWorkflow $workflow */

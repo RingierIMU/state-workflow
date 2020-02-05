@@ -1,6 +1,9 @@
 <?php
 
-namespace Tests\Fixtures\Traits;
+namespace Ringierimu\StateWorkflow\Tests\Fixtures\Traits;
+
+use Ringierimu\StateWorkflow\Tests\Fixtures\Models\User;
+use Ringierimu\StateWorkflow\Tests\Fixtures\Subscriber\UserEventSubscriber;
 
 /**
  * Trait ConfigTrait.
@@ -16,10 +19,10 @@ trait ConfigTrait
             // this should be your model name in camelcase. eg. PropertyListing::Class => propertyListing
             'user' => [
                 // class of your domain object
-                'class' => \Tests\Fixtures\Models\User::class,
+                'class' => User::class,
 
                 // Subscriber for this workflow which contains business rules
-                'subscriber' => \Tests\Fixtures\Subscriber\UserEventSubscriber::class,
+                'subscriber' => UserEventSubscriber::class,
 
                 // property of your object holding the actual state (default is "current_state")
                 'property_path' => 'user_state',
