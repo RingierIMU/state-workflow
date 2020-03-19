@@ -3,6 +3,7 @@
 namespace Ringierimu\StateWorkflow\Subscribers;
 
 use Ringierimu\StateWorkflow\Events\CompletedEvent;
+use Ringierimu\StateWorkflow\Events\EnteredEvent;
 use Ringierimu\StateWorkflow\Events\EnterEvent;
 use Ringierimu\StateWorkflow\Events\GuardEvent;
 use Ringierimu\StateWorkflow\Events\LeaveEvent;
@@ -113,7 +114,7 @@ class WorkflowSubscriber implements EventSubscriberInterface
             ]);
         }
 
-        $event = new EnterEvent($event);
+        $event = new EnteredEvent($event);
         event('workflow.entered', $event);
         event(sprintf('workflow.%s.entered', $workflowName), $event);
 
