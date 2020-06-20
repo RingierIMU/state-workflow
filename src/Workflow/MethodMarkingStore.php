@@ -1,16 +1,16 @@
-<?php namespace Ringierimu\StateWorkflow\Workflow;
+<?php
+
+namespace Ringierimu\StateWorkflow\Workflow;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Workflow\Marking;
 use Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface;
 
 /**
- * Class MethodMarkingStore
- * @package Ringierimu\StateWorkflow\Workflow
+ * Class MethodMarkingStore.
  */
 class MethodMarkingStore implements MarkingStoreInterface
 {
-
     private $property;
     private $propertyAccessor;
     private $singleState;
@@ -19,9 +19,9 @@ class MethodMarkingStore implements MarkingStoreInterface
      * MethodMarkingStore constructor.
      *
      * @param bool   $singleState
-     * @param string $property Used to determine methods to call
-     *                         The `getMarking` method will use `$subject->getProperty()`
-     *                         The `setMarking` method will use `$subject->setProperty(string|array $places, array $context = array())`
+     * @param string $property    Used to determine methods to call
+     *                            The `getMarking` method will use `$subject->getProperty()`
+     *                            The `setMarking` method will use `$subject->setProperty(string|array $places, array $context = array())`
      */
     public function __construct(bool $singleState = false, string $property = 'marking')
     {

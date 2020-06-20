@@ -77,7 +77,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
      * Add a workflow to the subject.
      *
      * @param StateWorkflow $workflow
-     * @param string $className
+     * @param string        $className
      */
     public function registerWorkflow(StateWorkflow $workflow, string $className)
     {
