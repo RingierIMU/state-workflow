@@ -8,13 +8,12 @@ use ReflectionClass;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowEventSubscriberInterface;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
 use Ringierimu\StateWorkflow\Subscribers\WorkflowSubscriber;
+use Ringierimu\StateWorkflow\Workflow\MethodMarkingStore;
 use Ringierimu\StateWorkflow\Workflow\StateWorkflow;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Workflow\Definition;
 use Symfony\Component\Workflow\DefinitionBuilder;
 use Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface;
-use Symfony\Component\Workflow\MarkingStore\MultipleStateMarkingStore;
-use Symfony\Component\Workflow\MarkingStore\SingleStateMarkingStore;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\StateMachine;
 use Symfony\Component\Workflow\SupportStrategy\ClassInstanceSupportStrategy;
@@ -78,9 +77,9 @@ class WorkflowRegistry implements WorkflowRegistryInterface
      * Add a workflow to the subject.
      *
      * @param StateWorkflow $workflow
-     * @param $supportStrategy
+     * @param string $className
      */
-    public function add(StateWorkflow $workflow, $supportStrategy)
+    public function registerWorkflow(StateWorkflow $workflow, string $className)
     {
         // Add method became addWorkflow method in Symfony Workflow Component v4.1
         // InstanceOfSupportStrategy class became ClassInstanceSupportStrategy in v4.1
@@ -88,7 +87,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
         $strategyClass = class_exists(InstanceOfSupportStrategy::class)
             ? InstanceOfSupportStrategy::class
             : ClassInstanceSupportStrategy::class;
-        $this->registry->$method($workflow, new $strategyClass($supportStrategy));
+        $this->registry->$method($workflow, new $strategyClass($className));
     }
 
     /**
@@ -101,7 +100,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
      */
     public function addWorkflows($name, array $workflowData)
     {
-        $builder = new DefinitionBuilder($workflowData['states']);
+        $definitionBuilder = new DefinitionBuilder($workflowData['states']);
 
         foreach ($workflowData['transitions'] as $transitionName => $transition) {
             if (!is_string($transitionName)) {
@@ -109,15 +108,15 @@ class WorkflowRegistry implements WorkflowRegistryInterface
             }
 
             foreach ((array) $transition['from'] as $form) {
-                $builder->addTransition(new Transition($transitionName, $form, $transition['to']));
+                $definitionBuilder->addTransition(new Transition($transitionName, $form, $transition['to']));
             }
         }
 
-        $definition = $builder->build();
+        $definition = $definitionBuilder->build();
         $markingStore = $this->getMarkingStoreInstance($workflowData);
         $workflow = $this->getWorkflowInstance($name, $workflowData, $definition, $markingStore);
 
-        $this->add($workflow, $workflowData['class']);
+        $this->registerWorkflow($workflow, $workflowData['class']);
     }
 
     /**
@@ -172,17 +171,22 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     protected function getMarkingStoreInstance(array $workflowData)
     {
         $markingStoreData = isset($workflowData['marking_store']) ? $workflowData['marking_store'] : [];
-        $arguments = isset($workflowData['property_path']) ? [$workflowData['property_path']] : ['current_state'];
+        $propertyPath = isset($workflowData['property_path']) ? $workflowData['property_path'] : 'current_state';
+
+        $singleState = true;
+
+        if (isset($markingStoreData['type']) && $markingStoreData['type'] === 'multiple_state') {
+            $singleState = false; // true if the subject can be in only one state at a given time
+        }
 
         if (isset($markingStoreData['class'])) {
             $className = $markingStoreData['class'];
-        } elseif (isset($markingStoreData['type']) && $markingStoreData['type'] === 'multiple_state') {
-            $className = MultipleStateMarkingStore::class;
         } else {
-            $className = SingleStateMarkingStore::class;
+            $className = MethodMarkingStore::class;
         }
 
-        $class = new \ReflectionClass($className);
+        $arguments = [$singleState, $propertyPath];
+        $class = new ReflectionClass($className);
 
         return $class->newInstanceArgs($arguments);
     }
