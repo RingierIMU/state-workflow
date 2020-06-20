@@ -48,6 +48,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
     {
         return __DIR__.'/../config/workflow.php';
     }
+
     /**
      * Return migrations path.
      *
@@ -57,7 +58,6 @@ class StateWorkflowServiceProvider extends ServiceProvider
     {
         return __DIR__.'/../database/migrations';
     }
-
 
     /**
      * Publish config file.
@@ -73,7 +73,6 @@ class StateWorkflowServiceProvider extends ServiceProvider
                 $this->migrationPath() => database_path('migrations'),
             ], 'state-workflow-migrations');
         }
-
     }
 
     /**
