@@ -48,15 +48,32 @@ class StateWorkflowServiceProvider extends ServiceProvider
     {
         return __DIR__.'/../config/workflow.php';
     }
+    /**
+     * Return migrations path.
+     *
+     * @return string
+     */
+    private function migrationPath()
+    {
+        return __DIR__.'/../database/migrations';
+    }
+
 
     /**
      * Publish config file.
      */
     protected function publishConfig()
     {
-        $this->publishes([
-            $this->configPath() => config_path('workflow.php'),
-        ], 'config');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                $this->configPath() => config_path('workflow.php'),
+            ], 'state-workflow-config');
+
+            $this->publishes([
+                $this->migrationPath() => database_path('migrations'),
+            ], 'state-workflow-migrations');
+        }
+
     }
 
     /**
@@ -64,7 +81,9 @@ class StateWorkflowServiceProvider extends ServiceProvider
      */
     protected function loadMigrations()
     {
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        if ($this->app->runningInConsole()) {
+            $this->loadMigrationsFrom($this->migrationPath());
+        }
     }
 
     /**
