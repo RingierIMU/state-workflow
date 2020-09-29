@@ -31,9 +31,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    protected static function newFactory()
-    {
-        return \Ringierimu\StateWorkflow\Tests\Fixtures\Database\Factories\UserFactory::new();
-    }
 }
