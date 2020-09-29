@@ -4,6 +4,7 @@ namespace Ringierimu\StateWorkflow\Tests\Fixtures\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Ringierimu\StateWorkflow\Tests\Fixtures\Database\Factories\UserFactory as UserFactoryAlias;
 use Ringierimu\StateWorkflow\Traits\HasWorkflowTrait;
 
 /**
@@ -31,4 +32,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected static function newFactory()
+    {
+        return UserFactoryAlias::new();
+    }
 }
