@@ -14,10 +14,10 @@ jobs:
 
     strategy:
       matrix:
-        php: [7.2, 7.3, 7.4]
+        php: [7.3, 7.4, 8.0]
         setup: [basic, stable, lowest]
         exclude:
-          - php: 7.4
+          - php: 8.0
             setup: lowest
 
     steps:
