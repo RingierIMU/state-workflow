@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $model_name
- * @property int $model_id
+ * @property int    $model_id
  * @property string $transition
  * @property string $from
  * @property string $to
- * @property int $user_id
+ * @property int    $user_id
  *
  * Class StateWorkflowHistory
  */
