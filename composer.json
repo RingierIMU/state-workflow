@@ -17,9 +17,9 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
-        "illuminate/events": "^7|^8|^9",
-        "illuminate/support": "^7|^8|^9",
+        "php": "^7.3|^8.0|^8.1",
+        "illuminate/events": "^7|^8|^9|^10",
+        "illuminate/support": "^7|^8|^9|^10",
         "symfony/event-dispatcher": "^5.1",
         "symfony/workflow": "^5.1",
         "symfony/property-access": "^5.1"
