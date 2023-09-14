@@ -1,5 +1,5 @@
 # Laravel State workflow
-Implement [Symfony Workflow](https://symfony.com/doc/current/components/workflow.html) component in Laravel
+[![Unit Test](https://github.com/RingierIMU/state-workflow/actions/workflows/main.yml/badge.svg)](https://github.com/RingierIMU/state-workflow/actions/workflows/main.yml)
 
 **Laravel State workflow** provide tools for defining and managing workflows and activities with ease.
 It offers an object oriented way to define a process or a life cycle that your object goes through. 
