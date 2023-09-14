@@ -80,6 +80,16 @@ use Ringierimu\StateWorkflow\Traits\HasWorkflowTrait;
 class Post extends Model
 {
     use HasWorkflowTrait;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        ...,
+        'current_state', // If not using default attribute, update this to match value in workflow.php
+    ]
 }
 ```
 
