@@ -108,9 +108,9 @@ class WorkflowSubscriber implements EventSubscriberInterface
         if (method_exists($model, 'saveStateHistory')) {
             $model->saveStateHistory([
                 'transition' => $event->getTransition()->getName(),
-                'from'       => $from,
-                'to'         => $to,
-                'context'    => method_exists($model, 'getContext') ? $model->getContext() : [],
+                'from' => $from,
+                'to' => $to,
+                'context' => method_exists($model, 'getContext') ? $model->getContext() : [],
             ]);
         }
 
@@ -160,12 +160,12 @@ class WorkflowSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            'workflow.guard'      => ['guardEvent'],
-            'workflow.leave'      => ['leaveEvent'],
+            'workflow.guard' => ['guardEvent'],
+            'workflow.leave' => ['leaveEvent'],
             'workflow.transition' => ['transitionEvent'],
-            'workflow.enter'      => ['enterEvent'],
-            'workflow.entered'    => ['enteredEvent'],
-            'workflow.completed'  => ['completedEvent'],
+            'workflow.enter' => ['enterEvent'],
+            'workflow.entered' => ['enteredEvent'],
+            'workflow.completed' => ['completedEvent'],
         ];
     }
 }

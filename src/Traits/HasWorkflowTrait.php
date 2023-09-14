@@ -53,7 +53,7 @@ trait HasWorkflowTrait
     }
 
     /**
-     * @param $transition
+     * @param       $transition
      * @param array $context
      *
      * @throws \ReflectionException

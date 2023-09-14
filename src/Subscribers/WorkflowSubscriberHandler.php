@@ -50,7 +50,7 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
             // if the method name starts with 'on'
             if (preg_match('/^on/', $method)) {
                 // attach the event listener
-                $event->listen($this->key($method), $class.'@'.$method);
+                $event->listen($this->key($method), $class . '@' . $method);
             }
         }
     }
@@ -118,7 +118,7 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
             $transition = $segments[0];
             unset($segments[0]);
             $flow = implode('_', $segments);
-            $name = $transition.'.'.$flow;
+            $name = $transition . '.' . $flow;
         }
 
         return sprintf('workflow.%s.%s', $this->name, $name);

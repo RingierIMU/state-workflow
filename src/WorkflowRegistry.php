@@ -93,7 +93,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     /**
      * Add a workflow to the registry from array.
      *
-     * @param $name
+     * @param       $name
      * @param array $workflowData
      *
      * @throws \ReflectionException
@@ -122,7 +122,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     /**
      * Return the workflow instance.
      *
-     * @param $name
+     * @param                       $name
      * @param array                 $workflowData
      * @param Definition            $definition
      * @param MarkingStoreInterface $markingStore
@@ -199,15 +199,13 @@ class WorkflowRegistry implements WorkflowRegistryInterface
      *
      * @throws \ReflectionException
      * @throws Exception
-     *
-     * @return void
      */
     public function addSubscriber($class, $name)
     {
         $reflection = new ReflectionClass($class);
 
         if (!$reflection->implementsInterface(WorkflowEventSubscriberInterface::class)) {
-            throw new Exception("$class must implements ".WorkflowEventSubscriberInterface::class);
+            throw new Exception("$class must implements " . WorkflowEventSubscriberInterface::class);
         }
 
         if ($reflection->isInstantiable()) {

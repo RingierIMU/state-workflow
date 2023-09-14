@@ -1,23 +1,52 @@
 <?php
 
 return [
-
     'setup' => [
+        /*
+        |--------------------------------------------------------------------------
+        | User Providers
+        |--------------------------------------------------------------------------
+        |
+        | This define Authentication user is model of your application.
+        | Ideally it should match your `providers.users.model` found in `config/auth.php`
+        | to leverage the default Laravel auth resolver
+        |
+        */
         'user_class' => \App\User::class,
     ],
 
-    // this should be your model name in camelcase. eg. PropertyListing::Class => propertyListing
+    /*
+    |--------------------------------------------------------------------------
+    | Domain entity
+    |--------------------------------------------------------------------------
+    |
+    | This should be your model name in camelCase.
+    |
+    | eg. UserProfile::Class => userProfile
+    |
+    | Attributes definition
+    |
+    | subscriber:
+    | Register subscriber for this workflow which contains business rules.
+    |
+    | property_path:
+    | Attribute on your domain entity holding the actual state (default is "current_state")
+    |
+    | states:
+    | Define all possible state your domain entity can transition to
+    |
+    | transitions:
+    | Define all allowed transitions to transit from one state to another
+    */
     'user' => [
         // class of your domain object
         'class' => \App\User::class,
 
-        // Register subscriber for this workflow which contains business rules. Uncomment line below to register subscriber
-        //'subscriber' => \App\Listeners\UserEventSubscriber::class,
+        'subscriber' => \App\Listeners\UserEventSubscriber::class,
 
-        // property of your object holding the actual state (default is "current_state")
-        //'property_path' => 'current_state', //uncomment this line to override default value
+        // Uncomment line below to override default attribute
+        // 'property_path' => 'current_state',
 
-        // list of all possible states
         'states' => [
             'new',
             'pending_activation',
@@ -26,23 +55,22 @@ return [
             'blocked',
         ],
 
-        // list of all possible transitions
         'transitions' => [
             'create' => [
                 'from' => 'new',
-                'to'   => 'pending_activation',
+                'to' => 'pending_activation',
             ],
             'activate' => [
                 'from' => 'pending_activation',
-                'to'   => 'activated',
+                'to' => 'activated',
             ],
             'block' => [
                 'from' => ['pending_activation', 'activated'],
-                'to'   => 'blocked',
+                'to' => 'blocked',
             ],
             'delete' => [
                 'from' => ['pending_activation', 'activated', 'blocked'],
-                'to'   => 'deleted',
+                'to' => 'deleted',
             ],
         ],
     ],

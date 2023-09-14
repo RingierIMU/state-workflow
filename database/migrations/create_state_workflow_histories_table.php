@@ -7,12 +7,9 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Class CreateStateWorkflowHistoryTable.
  */
-class CreateStateWorkflowHistoriesTestTable extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -31,11 +28,9 @@ class CreateStateWorkflowHistoriesTestTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {
         Schema::dropIfExists('state_workflow_histories');
     }
-}
+};
