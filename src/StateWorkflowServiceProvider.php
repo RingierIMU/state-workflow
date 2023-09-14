@@ -17,6 +17,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishConfig();
+        $this->publishDatabase();
         $this->loadMigrations();
         $this->registerCommands();
     }
@@ -46,7 +47,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
      */
     protected function configPath()
     {
-        return __DIR__.'/../config/workflow.php';
+        return __DIR__ . '/../config/workflow.php';
     }
 
     /**
@@ -56,7 +57,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
      */
     private function migrationPath()
     {
-        return __DIR__.'/../database/migrations';
+        return __DIR__ . '/../database/migrations';
     }
 
     /**
@@ -68,9 +69,15 @@ class StateWorkflowServiceProvider extends ServiceProvider
             $this->publishes([
                 $this->configPath() => config_path('workflow.php'),
             ], 'state-workflow-config');
+        }
+    }
 
+    protected function publishDatabase()
+    {
+        if ($this->app->runningInConsole()) {
+            $path = 'migrations/' . date('Y_m_d_His', time());
             $this->publishes([
-                $this->migrationPath() => database_path('migrations'),
+                $this->migrationPath() . '/create_state_workflow_histories_table.php' => database_path($path . '_create_state_workflow_histories_table.php'),
             ], 'state-workflow-migrations');
         }
     }

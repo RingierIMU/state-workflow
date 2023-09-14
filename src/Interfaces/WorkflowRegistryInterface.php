@@ -24,8 +24,6 @@ interface WorkflowRegistryInterface
      *
      * @param $class
      * @param $name
-     *
-     * @return void
      */
     public function addSubscriber($class, $name);
 }

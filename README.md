@@ -1,18 +1,17 @@
 # Laravel State workflow
 Implement [Symfony Workflow](https://symfony.com/doc/current/components/workflow.html) component in Laravel
 
-A workflow consist of state and actions to get from one place to another.
-The actions are called transitions which describes how to get from one state to another.
+**Laravel State workflow** provide tools for defining and managing workflows and activities with ease.
+It offers an object oriented way to define a process or a life cycle that your object goes through. 
+Each step or stage in the process is called a state. You do also define transitions that describe the action to get from one state to another.
+
+A workflow consist of **state** and **actions** to get from one state to another.
+These **actions** are called **transitions** which describes how to get from one state to another.
 ## Installation
 ```
 $ composer require ringierimu/state-workflow 
 ```
 
-For Laravel versions lower than 5.5, this step is important after running above script.
--   Open your config/app.php file and add custom service provider:
-```php
-Ringierimu\StateWorkflow\StateWorkflowServiceProvider::class
-```
 Publish `config/workflow.php` file
 ```php
 $ php artisan vendor:publish --provider="Ringierimu\StateWorkflow\StateWorkflowServiceProvider"
@@ -104,6 +103,25 @@ $post->canTransition("activate"); // True
 
 //Return Model state history
 $post->stateHistory();
+```
+
+### Authenticated User Resolver
+Ability to audit and track who action a specific state change for your object.
+The package leverage the default Laravel auth provider to resolve the authenticated user when applying the state changes.
+
+For a custom authentication mechanism, you should override `authenticatedUserId` in your object class with your own implementation.
+
+```php
+/**
+ * Return authenticated user id.
+ *
+ * @return int|null
+ */
+public function authenticatedUserId()
+{
+    // Implement authenticated user resolver
+}
+
 ```
 ### Fired Event
 Each step has three events that are fired in order:
@@ -252,4 +270,12 @@ You will be required to download `dot` command to make use of this command.
 ### Usage
 ```php
 php artisan workflow:dump workflow_name
-``` 
+```
+
+## Run Unit Test
+```bash
+composer test
+```
+
+## Credits
+- [Symfony Workflow](https://symfony.com/doc/current/components/workflow.html)
