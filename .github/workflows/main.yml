@@ -21,8 +21,10 @@ jobs:
         laravel: [8.*, 9.*, 10.*]
         dependency-version: [prefer-lowest, prefer-stable]
         include:
+          - dbal: 'ignore'
           - laravel: 8.*
             testbench: ^6.0
+            dbal: install
         exclude:
           - laravel: 10.*
             php: 8.0
@@ -50,6 +52,7 @@ jobs:
       - name: Install Composer dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
+          if [[ ${{matrix.dbal}} = 'install' ]]; then composer require doctrine/dbal; fi
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
       - name: Run PHPUnit tests
