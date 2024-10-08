@@ -24,10 +24,10 @@ class UserEventSubscriber extends WorkflowSubscriberHandler
         Log::info(__METHOD__);
 
         //$event->getOriginalEvent()->setBlocked(true);
-        Log::info('workflow name: '.$event->getOriginalEvent()->getWorkflowName());
-        Log::info('transition name: '.$event->getOriginalEvent()->getTransition()->getName());
-        Log::info('froms: '.implode(',', $event->getOriginalEvent()->getTransition()->getFroms()));
-        Log::info('tos: '.implode(',', $event->getOriginalEvent()->getTransition()->getTos()));
+        Log::info('workflow name: ' . $event->getOriginalEvent()->getWorkflowName());
+        Log::info('transition name: ' . $event->getOriginalEvent()->getTransition()->getName());
+        Log::info('froms: ' . implode(',', $event->getOriginalEvent()->getTransition()->getFroms()));
+        Log::info('tos: ' . implode(',', $event->getOriginalEvent()->getTransition()->getTos()));
     }
 
     /**
@@ -37,10 +37,10 @@ class UserEventSubscriber extends WorkflowSubscriberHandler
     {
         Log::info(__METHOD__);
 
-        Log::info('workflow name: '.$event->getOriginalEvent()->getWorkflowName());
-        Log::info('transition name: '.$event->getOriginalEvent()->getTransition()->getName());
-        Log::info('froms: '.implode(',', $event->getOriginalEvent()->getTransition()->getFroms()));
-        Log::info('tos: '.implode(',', $event->getOriginalEvent()->getTransition()->getTos()));
+        Log::info('workflow name: ' . $event->getOriginalEvent()->getWorkflowName());
+        Log::info('transition name: ' . $event->getOriginalEvent()->getTransition()->getName());
+        Log::info('froms: ' . implode(',', $event->getOriginalEvent()->getTransition()->getFroms()));
+        Log::info('tos: ' . implode(',', $event->getOriginalEvent()->getTransition()->getTos()));
     }
 
     /**
@@ -95,10 +95,10 @@ class UserEventSubscriber extends WorkflowSubscriberHandler
     {
         Log::info(__METHOD__);
 
-        Log::info('workflow name: '.$event->getOriginalEvent()->getWorkflowName());
-        Log::info('transition name: '.$event->getOriginalEvent()->getTransition()->getName());
-        Log::info('froms: '.implode(',', $event->getOriginalEvent()->getTransition()->getFroms()));
-        Log::info('tos: '.implode(',', $event->getOriginalEvent()->getTransition()->getTos()));
+        Log::info('workflow name: ' . $event->getOriginalEvent()->getWorkflowName());
+        Log::info('transition name: ' . $event->getOriginalEvent()->getTransition()->getName());
+        Log::info('froms: ' . implode(',', $event->getOriginalEvent()->getTransition()->getFroms()));
+        Log::info('tos: ' . implode(',', $event->getOriginalEvent()->getTransition()->getTos()));
     }
 
     /**

@@ -1,7 +1,6 @@
 <?php
 
 namespace Ringierimu\StateWorkflow\Tests {
-
     use Ringierimu\StateWorkflow\WorkflowRegistry;
 
     /**
@@ -62,7 +61,6 @@ namespace Ringierimu\StateWorkflow\Tests {
 }
 
 namespace {
-
     $events = null;
 
     if (!function_exists('event')) {
