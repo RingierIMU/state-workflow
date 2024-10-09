@@ -2,7 +2,6 @@ preset: psr12
 version: 8
 enabled:
   - alpha_ordered_imports
-  - binary_operator_spaces
   - blank_line_before_return
   - cast_spaces
   - hash_to_slash_comment
@@ -55,5 +54,4 @@ enabled:
   - trim_array_spaces
   - unalign_double_arrow
   - unalign_equals
-  - unary_operator_spaces
   - whitespace_after_comma_in_array
