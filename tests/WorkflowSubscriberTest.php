@@ -8,7 +8,6 @@ namespace Ringierimu\StateWorkflow\Tests {
      */
     class WorkflowSubscriberTest extends TestCase
     {
-
         public function test_if_workflow_subscriber_emit_events()
         {
             global $events;
