@@ -51,4 +51,4 @@ jobs:
 
       - name: Run PHPUnit tests
         run: |
-          vendor/bin/phpunit --debug
+          vendor/bin/phpunit
