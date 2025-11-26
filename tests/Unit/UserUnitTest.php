@@ -12,49 +12,23 @@ use Symfony\Component\Workflow\Exception\NotEnabledTransitionException;
  */
 class UserUnitTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @throws \ReflectionException
-     */
-    public function it_return_workflow_instance()
+    public function test_it_return_workflow_instance()
     {
         $this->assertInstanceOf(StateWorkflow::class, $this->user->workflow());
     }
 
-    /**
-     * Test current state to be new.
-     *
-     * @test
-     *
-     * @throws \ReflectionException
-     */
-    public function is_current_state_new()
+    public function test_is_current_state_new()
     {
         $this->assertEquals('new', $this->user->state());
     }
 
-    /**
-     * Test if transition can be applied or not.
-     *
-     * @test
-     *
-     * @throws \ReflectionException
-     */
-    public function can_apply_transition()
+    public function test_can_apply_transition()
     {
         $this->assertTrue($this->user->canTransition('create'));
         $this->assertFalse($this->user->canTransition('block'));
     }
 
-    /**
-     * Test invalid transition.
-     *
-     * @test
-     *
-     * @throws \ReflectionException
-     */
-    public function invalid_transition_throws_exception()
+    public function test_invalid_transition_throws_exception()
     {
         $expectedExceptionClass = class_exists(NotEnabledTransitionException::class)
             ? NotEnabledTransitionException::class
@@ -64,14 +38,7 @@ class UserUnitTest extends TestCase
         $this->user->applyTransition('block');
     }
 
-    /**
-     * Change Model states by applying transitions.
-     *
-     * @test
-     *
-     * @throws \ReflectionException
-     */
-    public function apply_transitions()
+    public function test_apply_transitions()
     {
         $this->user->applyTransition('create');
         $this->user = $this->user->refresh();
