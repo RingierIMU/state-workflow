@@ -78,17 +78,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
             $path = 'migrations/' . date('Y_m_d_His', time());
             $this->publishes([
                 $this->migrationPath() . '/create_state_workflow_histories_table.php' => database_path($path . '_create_state_workflow_histories_table.php'),
-            ], 'state-workflow-migrations');
-        }
-    }
-
-    /**
-     * Load migration files.
-     */
-    protected function loadMigrations()
-    {
-        if ($this->app->runningInConsole()) {
-            $this->loadMigrationsFrom($this->migrationPath());
+            ], 'state-workflow-migration');
         }
     }
 
