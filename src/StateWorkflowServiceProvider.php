@@ -18,7 +18,6 @@ class StateWorkflowServiceProvider extends ServiceProvider
     {
         $this->publishConfig();
         $this->publishDatabase();
-        $this->loadMigrations();
         $this->registerCommands();
     }
 
