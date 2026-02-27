@@ -8,17 +8,23 @@ Each step or stage in the process is called a state. You do also define transiti
 A workflow consist of **state** and **actions** to get from one state to another.
 These **actions** are called **transitions** which describes how to get from one state to another.
 ## Installation
-```
-$ composer require ringierimu/state-workflow 
+```bash
+composer require ringierimu/state-workflow 
 ```
 
 Publish `config/workflow.php` file
-```php
-$ php artisan vendor:publish --provider="Ringierimu\StateWorkflow\StateWorkflowServiceProvider"
+```bash
+php artisan vendor:publish  --tag="state-workflow-config"
 ```
-Run migrations
+
+Publish migration
+```bash
+php artisan vendor:publish --tag="state-workflow-migration"
 ```
-$ php artisan migrate
+
+Run migration
+```bash
+php artisan migrate
 ```
 ## Configuration
 1. Open `config/workflow.php` and configure it
