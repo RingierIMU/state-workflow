@@ -9,14 +9,14 @@ Requirements for this modernization milestone. Each maps to roadmap phases.
 
 ### Dependencies
 
-- [ ] **DEPS-01**: Package requires PHP `^8.3` minimum
-- [ ] **DEPS-02**: Package requires `illuminate/*` `^11.0|^12.0` (drop Laravel 10)
-- [ ] **DEPS-03**: Package requires `symfony/workflow` `^7.0` (drop `^5.1|^6.0`)
-- [ ] **DEPS-04**: Package requires `symfony/event-dispatcher` `^7.0`
-- [ ] **DEPS-05**: Package requires `symfony/property-access` `^7.0`
-- [ ] **DEPS-06**: `InstanceOfSupportStrategy` dual-import shim removed from `WorkflowRegistry.php` — unconditionally use `ClassInstanceSupportStrategy`
-- [ ] **DEPS-07**: `orchestra/testbench` updated to `^9.0|^10.0`
-- [ ] **DEPS-08**: All dependencies resolve cleanly with `composer update --prefer-lowest --prefer-stable`
+- [x] **DEPS-01**: Package requires PHP `^8.3` minimum
+- [x] **DEPS-02**: Package requires `illuminate/*` `^11.0|^12.0` (drop Laravel 10)
+- [x] **DEPS-03**: Package requires `symfony/workflow` `^7.0` (drop `^5.1|^6.0`)
+- [x] **DEPS-04**: Package requires `symfony/event-dispatcher` `^7.0`
+- [x] **DEPS-05**: Package requires `symfony/property-access` `^7.0`
+- [x] **DEPS-06**: `InstanceOfSupportStrategy` dual-import shim removed from `WorkflowRegistry.php` — unconditionally use `InstanceOfSupportStrategy`
+- [x] **DEPS-07**: `orchestra/testbench` updated to `^9.15|^10.0`
+- [x] **DEPS-08**: All dependencies resolve cleanly with `composer update --prefer-lowest --prefer-stable`
 
 ### Rector
 
@@ -79,14 +79,14 @@ Deferred to future release. Tracked but not in current roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DEPS-01 | Phase 1 | Pending |
-| DEPS-02 | Phase 1 | Pending |
-| DEPS-03 | Phase 1 | Pending |
-| DEPS-04 | Phase 1 | Pending |
-| DEPS-05 | Phase 1 | Pending |
-| DEPS-06 | Phase 1 | Pending |
-| DEPS-07 | Phase 1 | Pending |
-| DEPS-08 | Phase 1 | Pending |
+| DEPS-01 | Phase 1 | Complete |
+| DEPS-02 | Phase 1 | Complete |
+| DEPS-03 | Phase 1 | Complete |
+| DEPS-04 | Phase 1 | Complete |
+| DEPS-05 | Phase 1 | Complete |
+| DEPS-06 | Phase 1 | Complete |
+| DEPS-07 | Phase 1 | Complete |
+| DEPS-08 | Phase 1 | Complete |
 | RECT-01 | Phase 2 | Pending |
 | RECT-02 | Phase 2 | Pending |
 | RECT-03 | Phase 2 | Pending |
