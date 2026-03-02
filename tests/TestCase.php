@@ -19,7 +19,7 @@ abstract class TestCase extends OrchestraTestCase
     /** @var User */
     protected $user;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
