@@ -12,6 +12,7 @@ return new class () extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('user_state');
+            $table->string('subscription_state')->nullable();
         });
     }
 
@@ -21,7 +22,7 @@ return new class () extends Migration {
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('user_state');
+            $table->dropColumn(['user_state', 'subscription_state']);
         });
     }
 };
