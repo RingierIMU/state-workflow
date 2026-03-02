@@ -1,0 +1,62 @@
+# Project State
+
+## Project Reference
+
+See: .planning/PROJECT.md (updated 2026-03-02)
+
+**Core value:** Bring ringierimu/state-workflow to PHP 8.3+ / Laravel 11+ / Pest 4 while preserving all existing public API
+**Current focus:** Phase 1 — Dependency Update
+
+## Current Position
+
+Phase: 1 of 4 (Dependency Update)
+Plan: 0 of TBD in current phase
+Status: Ready to plan
+Last activity: 2026-03-02 — Roadmap created, project initialized
+
+Progress: [░░░░░░░░░░] 0%
+
+## Performance Metrics
+
+**Velocity:**
+- Total plans completed: 0
+- Average duration: -
+- Total execution time: 0 hours
+
+**By Phase:**
+
+| Phase | Plans | Total | Avg/Plan |
+|-------|-------|-------|----------|
+| - | - | - | - |
+
+**Recent Trend:**
+- Last 5 plans: -
+- Trend: -
+
+*Updated after each plan completion*
+
+## Accumulated Context
+
+### Decisions
+
+Decisions are logged in PROJECT.md Key Decisions table.
+Recent decisions affecting current work:
+
+- [Phase 1]: Remove InstanceOfSupportStrategy shim in WorkflowRegistry.php before running any other tools — autoloader crash on Symfony 7 boot otherwise
+- [Phase 2]: Scope rector.php withPaths() strictly to src/ only — running Rector on tests/ conflicts with Pest migration
+- [Phase 3]: WorkflowSubscriberTest.php global event() mock must be replaced with Event::fake() — required refactor, not optional cleanup
+
+### Pending Todos
+
+None yet.
+
+### Blockers/Concerns
+
+- [Phase 3 risk]: WorkflowSubscriberTest.php global namespace event() mock is incompatible with Pest execution model — known blocker, solution documented (Event::fake())
+- [Phase 1 check]: Symfony 7 MethodMarkingStore constructor API should be spot-checked against src/Workflow/MethodMarkingStore.php before committing constraint update
+
+## Session Continuity
+
+Last session: 2026-03-02
+Stopped at: Roadmap created — ready to plan Phase 1
+Resume file: None

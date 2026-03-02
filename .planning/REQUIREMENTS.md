@@ -102,9 +102,9 @@ Deferred to future release. Tracked but not in current roadmap.
 | CICD-02 | Phase 4 | Pending |
 | CICD-03 | Phase 4 | Pending |
 | CICD-04 | Phase 4 | Pending |
-| DOCS-01 | Phase 5 | Pending |
-| DOCS-02 | Phase 5 | Pending |
-| DOCS-03 | Phase 5 | Pending |
+| DOCS-01 | Phase 4 | Pending |
+| DOCS-02 | Phase 4 | Pending |
+| DOCS-03 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 26 total
@@ -113,4 +113,4 @@ Deferred to future release. Tracked but not in current roadmap.
 
 ---
 *Requirements defined: 2026-03-02*
-*Last updated: 2026-03-02 after initial definition*
+*Last updated: 2026-03-02 after roadmap creation (DOCS moved from Phase 5 to Phase 4)*
