@@ -28,7 +28,8 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. `php artisan` (or package bootstrap) does not throw a ClassNotFoundException on boot — the InstanceOfSupportStrategy shim is gone and ClassInstanceSupportStrategy is used unconditionally
   3. The existing PHPUnit test suite passes against the newly-installed vendor tree (confirms no API breakage from Symfony 7 upgrade)
   4. `composer.json` requires PHP `^8.3`, `illuminate/*` `^11.0|^12.0`, `symfony/workflow ^7.0`, and `orchestra/testbench ^9.0|^10.0`
-**Plans**: TBD
+**Plans:** 1 plan
+- [ ] 01-01-PLAN.md — Update composer.json constraints, remove all backward-compatibility shims, validate clean install and test suite
 
 ### Phase 2: Rector Pass
 **Goal**: Source files in src/ are modernized to PHP 8.3 idioms; Rector and its config are removed from the repository
@@ -71,7 +72,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Dependency Update | 0/TBD | Not started | - |
+| 1. Dependency Update | 0/1 | Planned | - |
 | 2. Rector Pass | 0/TBD | Not started | - |
 | 3. Pest Migration and Test Expansion | 0/TBD | Not started | - |
 | 4. CI and Documentation | 0/TBD | Not started | - |
