@@ -37,16 +37,16 @@ Requirements for this modernization milestone. Each maps to roadmap phases.
 
 ### CI/CD
 
-- [ ] **CICD-01**: GitHub Actions matrix updated to PHP [8.3, 8.4] x Laravel [11.*, 12.*]
-- [ ] **CICD-02**: Matrix `include:` pins `testbench: ^9.0` for Laravel 11 and `testbench: ^10.0` for Laravel 12
-- [ ] **CICD-03**: `prefer-lowest` and `prefer-stable` dependency strategies both tested in CI
-- [ ] **CICD-04**: CI runs `vendor/bin/pest` instead of `vendor/bin/phpunit`
+- [x] **CICD-01**: GitHub Actions matrix updated to PHP [8.3, 8.4] x Laravel [11.*, 12.*]
+- [x] **CICD-02**: Matrix `include:` pins `testbench: ^9.0` for Laravel 11 and `testbench: ^10.0` for Laravel 12
+- [x] **CICD-03**: `prefer-lowest` and `prefer-stable` dependency strategies both tested in CI
+- [x] **CICD-04**: CI runs `vendor/bin/pest` instead of `vendor/bin/phpunit`
 
 ### Documentation
 
-- [ ] **DOCS-01**: README updated with new minimum version requirements (PHP 8.3+, Laravel 11+)
-- [ ] **DOCS-02**: README installation instructions updated for current dependency versions
-- [ ] **DOCS-03**: CHANGELOG or release notes drafted for the upgrade
+- [x] **DOCS-01**: README updated with new minimum version requirements (PHP 8.3+, Laravel 11+)
+- [x] **DOCS-02**: README installation instructions updated for current dependency versions
+- [x] **DOCS-03**: CHANGELOG or release notes drafted for the upgrade
 
 ## v2 Requirements
 
@@ -98,13 +98,13 @@ Deferred to future release. Tracked but not in current roadmap.
 | TEST-05 | Phase 3 | Complete |
 | TEST-06 | Phase 3 | Complete |
 | TEST-07 | Phase 3 | Complete |
-| CICD-01 | Phase 4 | Pending |
-| CICD-02 | Phase 4 | Pending |
-| CICD-03 | Phase 4 | Pending |
-| CICD-04 | Phase 4 | Pending |
-| DOCS-01 | Phase 4 | Pending |
-| DOCS-02 | Phase 4 | Pending |
-| DOCS-03 | Phase 4 | Pending |
+| CICD-01 | Phase 4 | Complete |
+| CICD-02 | Phase 4 | Complete |
+| CICD-03 | Phase 4 | Complete |
+| CICD-04 | Phase 4 | Complete |
+| DOCS-01 | Phase 4 | Complete |
+| DOCS-02 | Phase 4 | Complete |
+| DOCS-03 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 26 total
