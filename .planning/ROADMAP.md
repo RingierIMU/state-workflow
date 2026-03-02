@@ -12,8 +12,8 @@ A sequential transformation pipeline that brings `ringierimu/state-workflow` fro
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Dependency Update** - Update composer.json constraints and remove Symfony compatibility shim
-- [ ] **Phase 2: Rector Pass** - Apply driftingly/rector-laravel to src/ only, then remove Rector from dev dependencies
+- [x] **Phase 1: Dependency Update** - Update composer.json constraints and remove Symfony compatibility shim
+- [x] **Phase 2: Rector Pass** - Apply driftingly/rector-laravel to src/ only, then remove Rector from dev dependencies
 - [ ] **Phase 3: Pest Migration and Test Expansion** - Migrate all PHPUnit tests to Pest 4 and add new coverage
 - [ ] **Phase 4: CI and Documentation** - Rebuild GitHub Actions matrix and update README/CHANGELOG
 
@@ -74,7 +74,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Dependency Update | 0/1 | Planned | - |
-| 2. Rector Pass | 0/TBD | Not started | - |
+| 1. Dependency Update | 1/1 | Complete | 2026-03-02 |
+| 2. Rector Pass | 2/2 | Complete | 2026-03-02 |
 | 3. Pest Migration and Test Expansion | 0/TBD | Not started | - |
 | 4. CI and Documentation | 0/TBD | Not started | - |

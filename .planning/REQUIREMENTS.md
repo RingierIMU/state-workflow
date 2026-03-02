@@ -20,10 +20,10 @@ Requirements for this modernization milestone. Each maps to roadmap phases.
 
 ### Rector
 
-- [ ] **RECT-01**: `driftingly/rector-laravel` applied to `src/` directory only (not `tests/`)
-- [ ] **RECT-02**: Rector dry-run reviewed — no public API signatures changed in `HasWorkflowTrait`, `StateWorkflow`, or `WorkflowRegistry`
-- [ ] **RECT-03**: Rector and `driftingly/rector-laravel` removed from dev dependencies after applying
-- [ ] **RECT-04**: All existing PHPUnit tests pass after Rector changes
+- [x] **RECT-01**: `driftingly/rector-laravel` applied to `src/` directory only (not `tests/`)
+- [x] **RECT-02**: Rector dry-run reviewed — no public API signatures changed in `HasWorkflowTrait`, `StateWorkflow`, or `WorkflowRegistry`
+- [x] **RECT-03**: Rector and `driftingly/rector-laravel` removed from dev dependencies after applying
+- [x] **RECT-04**: All existing PHPUnit tests pass after Rector changes
 
 ### Testing
 
@@ -87,10 +87,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | DEPS-06 | Phase 1 | Complete |
 | DEPS-07 | Phase 1 | Complete |
 | DEPS-08 | Phase 1 | Complete |
-| RECT-01 | Phase 2 | Pending |
-| RECT-02 | Phase 2 | Pending |
-| RECT-03 | Phase 2 | Pending |
-| RECT-04 | Phase 2 | Pending |
+| RECT-01 | Phase 2 | Complete |
+| RECT-02 | Phase 2 | Complete |
+| RECT-03 | Phase 2 | Complete |
+| RECT-04 | Phase 2 | Complete |
 | TEST-01 | Phase 3 | Pending |
 | TEST-02 | Phase 3 | Pending |
 | TEST-03 | Phase 3 | Pending |
