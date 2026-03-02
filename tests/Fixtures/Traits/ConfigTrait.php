@@ -10,10 +10,7 @@ use Ringierimu\StateWorkflow\Tests\Fixtures\Subscriber\UserEventSubscriber;
  */
 trait ConfigTrait
 {
-    /**
-     * @return array
-     */
-    public function getWorflowConfig()
+    public function getWorflowConfig(): array
     {
         return [
             // this should be your model name in camelcase. eg. PropertyListing::Class => propertyListing
@@ -57,5 +54,33 @@ trait ConfigTrait
                 ],
             ],
         ];
+    }
+
+    /**
+     * Return config with both primary and subscription workflows for multi-workflow testing.
+     */
+    public function getMultiWorflowConfig(): array
+    {
+        return array_merge($this->getWorflowConfig(), [
+            'user_subscription' => [
+                'class' => User::class,
+                'property_path' => 'subscription_state',
+                'states' => [
+                    'inactive',
+                    'active',
+                    'cancelled',
+                ],
+                'transitions' => [
+                    'subscribe' => [
+                        'from' => 'inactive',
+                        'to' => 'active',
+                    ],
+                    'cancel' => [
+                        'from' => 'active',
+                        'to' => 'cancelled',
+                    ],
+                ],
+            ],
+        ]);
     }
 }

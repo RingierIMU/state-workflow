@@ -1,15 +1,26 @@
 # Laravel State workflow
-[![Unit Test](https://github.com/RingierIMU/state-workflow/actions/workflows/main.yml/badge.svg)](https://github.com/RingierIMU/state-workflow/actions/workflows/main.yml)
+[![Tests](https://github.com/RingierIMU/state-workflow/actions/workflows/main.yml/badge.svg)](https://github.com/RingierIMU/state-workflow/actions/workflows/main.yml)
 
 **Laravel State workflow** provide tools for defining and managing workflows and activities with ease.
-It offers an object oriented way to define a process or a life cycle that your object goes through. 
+It offers an object oriented way to define a process or a life cycle that your object goes through.
 Each step or stage in the process is called a state. You do also define transitions that describe the action to get from one state to another.
 
 A workflow consist of **state** and **actions** to get from one state to another.
 These **actions** are called **transitions** which describes how to get from one state to another.
+
+## Requirements
+
+| Version | PHP | Laravel |
+|---------|-----|---------|
+| 5.x     | 8.3+ | 11, 12 |
+| 4.x     | 8.1+ | 10, 11 |
+
 ## Installation
+
+Requires PHP 8.3+ and Laravel 11+.
+
 ```bash
-composer require ringierimu/state-workflow 
+composer require ringierimu/state-workflow
 ```
 
 Publish `config/workflow.php` file

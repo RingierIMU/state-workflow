@@ -2,14 +2,18 @@
 
 namespace Ringierimu\StateWorkflow\Traits;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use ReflectionClass;
+use ReflectionException;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
 use Ringierimu\StateWorkflow\Models\StateWorkflowHistory;
 use Ringierimu\StateWorkflow\Workflow\StateWorkflow;
+use Symfony\Component\Workflow\Marking;
+use Symfony\Component\Workflow\Transition;
 
 /**
  * Trait HasWorkflowTrait.
- *
- * @author Norby Baruani <norbyb@roam.africa/>
  */
 trait HasWorkflowTrait
 {
@@ -29,7 +33,7 @@ trait HasWorkflowTrait
     private $stateHistoryModel = StateWorkflowHistory::class;
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      *
      * @return StateWorkflow
      */
@@ -43,9 +47,7 @@ trait HasWorkflowTrait
     }
 
     /**
-     * @throws \ReflectionException
-     *
-     * @return mixed
+     * @throws ReflectionException
      */
     public function state()
     {
@@ -53,12 +55,11 @@ trait HasWorkflowTrait
     }
 
     /**
-     * @param       $transition
      * @param array $context
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      *
-     * @return \Symfony\Component\Workflow\Marking
+     * @return Marking
      */
     public function applyTransition($transition, $context = [])
     {
@@ -68,9 +69,7 @@ trait HasWorkflowTrait
     }
 
     /**
-     * @param $transition
-     *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      *
      * @return bool
      */
@@ -82,9 +81,9 @@ trait HasWorkflowTrait
     /**
      * Return object available transitions.
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      *
-     * @return array|\Symfony\Component\Workflow\Transition[]
+     * @return array|Transition[]
      */
     public function getEnabledTransition()
     {
@@ -92,7 +91,7 @@ trait HasWorkflowTrait
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function stateHistory()
     {
@@ -102,9 +101,8 @@ trait HasWorkflowTrait
     /**
      * Save Model changes and log changes to StateHistory table.
      *
-     * @param array $transitionData
      *
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function saveStateHistory(array $transitionData)
     {
@@ -126,27 +124,19 @@ trait HasWorkflowTrait
     /**
      * Model configuration name on config/workflow.php.
      *
-     * @throws \ReflectionException
-     *
-     * @return string
+     * @throws ReflectionException
      */
-    public function configName()
+    public function configName(): string
     {
-        return lcfirst((new \ReflectionClass($this))->getShortName());
+        return lcfirst((new ReflectionClass($this))->getShortName());
     }
 
-    /**
-     * @return string
-     */
-    public function authUserForeignKey()
+    public function authUserForeignKey(): string
     {
         return 'user_id';
     }
 
-    /**
-     * @return string
-     */
-    public function modelPrimaryKey()
+    public function modelPrimaryKey(): string
     {
         return 'id';
     }

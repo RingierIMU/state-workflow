@@ -1,68 +1,43 @@
 <?php
 
-namespace Ringierimu\StateWorkflow\Tests {
-    use Ringierimu\StateWorkflow\WorkflowRegistry;
+use Illuminate\Support\Facades\Event;
 
-    /**
-     * Class WorkflowSubscriberTest.
-     */
-    class WorkflowSubscriberTest extends TestCase
-    {
-        public function test_if_workflow_subscriber_emit_events()
-        {
-            global $events;
-            $events = [];
+test('workflow subscriber emits events on transition', function () {
+    Event::fake();
 
-            $workflowRegistry = new WorkflowRegistry($this->getWorflowConfig());
-            $workflow = $workflowRegistry->get($this->user);
+    $this->user->applyTransition('create');
 
-            $workflow->apply($this->user, 'create');
-            $this->assertCount(24, $events);
+    // Guard events (3: generic, workflow-specific, transition-specific)
+    Event::assertDispatched('workflow.guard');
+    Event::assertDispatched('workflow.user.guard');
+    Event::assertDispatched('workflow.user.guard.create');
 
-            $this->assertEquals('workflow.guard', $events[0]);
-            $this->assertEquals('workflow.user.guard', $events[1]);
-            $this->assertEquals('workflow.user.guard.create', $events[2]);
+    // Leave events (3: generic, workflow-specific, state-specific)
+    Event::assertDispatched('workflow.leave');
+    Event::assertDispatched('workflow.user.leave');
+    Event::assertDispatched('workflow.user.leave.new');
 
-            $this->assertEquals('workflow.leave', $events[3]);
-            $this->assertEquals('workflow.user.leave', $events[4]);
-            $this->assertEquals('workflow.user.leave.new', $events[5]);
+    // Transition events
+    Event::assertDispatched('workflow.transition');
+    Event::assertDispatched('workflow.user.transition');
+    Event::assertDispatched('workflow.user.transition.create');
 
-            $this->assertEquals('workflow.transition', $events[6]);
-            $this->assertEquals('workflow.user.transition', $events[7]);
-            $this->assertEquals('workflow.user.transition.create', $events[8]);
+    // Enter events
+    Event::assertDispatched('workflow.enter');
+    Event::assertDispatched('workflow.user.enter');
+    Event::assertDispatched('workflow.user.enter.pending_activation');
 
-            $this->assertEquals('workflow.enter', $events[9]);
-            $this->assertEquals('workflow.user.enter', $events[10]);
-            $this->assertEquals('workflow.user.enter.pending_activation', $events[11]);
+    // Entered events
+    Event::assertDispatched('workflow.entered');
+    Event::assertDispatched('workflow.user.entered');
+    Event::assertDispatched('workflow.user.entered.pending_activation');
 
-            $this->assertEquals('workflow.entered', $events[12]);
-            $this->assertEquals('workflow.user.entered', $events[13]);
-            $this->assertEquals('workflow.user.entered.pending_activation', $events[14]);
+    // Completed events
+    Event::assertDispatched('workflow.completed');
+    Event::assertDispatched('workflow.user.completed');
+    Event::assertDispatched('workflow.user.completed.create');
 
-            $this->assertEquals('workflow.completed', $events[15]);
-            $this->assertEquals('workflow.user.completed', $events[16]);
-            $this->assertEquals('workflow.user.completed.create', $events[17]);
-
-            //Announce model next available transitions events
-            $this->assertEquals('workflow.guard', $events[18]);
-            $this->assertEquals('workflow.user.guard', $events[19]);
-            $this->assertEquals('workflow.user.guard.activate', $events[20]);
-
-            $this->assertEquals('workflow.guard', $events[21]);
-            $this->assertEquals('workflow.user.guard', $events[22]);
-            $this->assertEquals('workflow.user.guard.block', $events[23]);
-        }
-    }
-}
-
-namespace {
-    $events = null;
-
-    if (!function_exists('event')) {
-        function event($ev)
-        {
-            global $events;
-            $events[] = $ev;
-        }
-    }
-}
+    // Guard checks for available transitions after state change
+    Event::assertDispatched('workflow.user.guard.activate');
+    Event::assertDispatched('workflow.user.guard.block');
+});

@@ -5,6 +5,8 @@ namespace Ringierimu\StateWorkflow\Console\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
+use ReflectionClass;
+use ReflectionException;
 use Ringierimu\StateWorkflow\Workflow\StateWorkflow;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Workflow\Dumper\GraphvizDumper;
@@ -13,9 +15,6 @@ use Symfony\Component\Workflow\Dumper\GraphvizDumper;
  * Class StateWorkflowDumpCommand.
  *
  * Symfony dump workflow https://symfony.com/doc/current/workflow/dumping-workflows.html
- *
- *
- * @author Norby Baruani <norbyb@roam.africa/>
  */
 class StateWorkflowDumpCommand extends Command
 {
@@ -36,10 +35,10 @@ class StateWorkflowDumpCommand extends Command
     protected $description = 'Dumps a State Workflow as a graphviz file using GraphvizDumper.';
 
     /**
-     * @throws \ReflectionException
+     * @throws ReflectionException
      * @throws Exception
      */
-    public function handle()
+    public function handle(): void
     {
         $workflowName = $this->argument('workflow');
         $format = $this->option('format');
@@ -47,7 +46,7 @@ class StateWorkflowDumpCommand extends Command
 
         if (!isset($config[$workflowName])) {
             throw new Exception(
-                "Workflow $workflowName is not configured. Make sure it is configured correctly on the config file."
+                "Workflow $workflowName is not configured. Make sure it is configured correctly on the config file.",
             );
         }
 
@@ -57,12 +56,12 @@ class StateWorkflowDumpCommand extends Command
 
         $class = $config[$workflowName]['class'];
 
-        $ref = new \ReflectionClass($class);
+        $ref = new ReflectionClass($class);
         $model = $ref->newInstance();
 
         if (!method_exists($model, 'workflow')) {
             throw new Exception(
-                "Class $class does not support State Workflow. Make sure Class is configured correctly"
+                "Class $class does not support State Workflow. Make sure Class is configured correctly",
             );
         }
 

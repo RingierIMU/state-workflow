@@ -5,6 +5,7 @@ namespace Ringierimu\StateWorkflow;
 use Exception;
 use Illuminate\Support\Facades\Event;
 use ReflectionClass;
+use ReflectionException;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowEventSubscriberInterface;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
 use Ringierimu\StateWorkflow\Subscribers\WorkflowSubscriber;
@@ -16,42 +17,29 @@ use Symfony\Component\Workflow\DefinitionBuilder;
 use Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\StateMachine;
-use Symfony\Component\Workflow\SupportStrategy\ClassInstanceSupportStrategy;
 use Symfony\Component\Workflow\SupportStrategy\InstanceOfSupportStrategy;
 use Symfony\Component\Workflow\Transition;
 use Symfony\Component\Workflow\Workflow;
+use Symfony\Component\Workflow\WorkflowInterface;
 
 /**
  * Class WorkflowRegistry.
  */
 class WorkflowRegistry implements WorkflowRegistryInterface
 {
-    /**
-     * @var Registry
-     */
-    protected $registry;
+    protected Registry $registry;
 
-    /**
-     * @var array
-     */
-    protected $config;
-
-    /**
-     * @var EventDispatcher
-     */
-    protected $dispatcher;
+    protected EventDispatcher $dispatcher;
 
     /**
      * WorkflowRegistry constructor.
      *
-     * @param array $config
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
-    public function __construct(array $config)
+    public function __construct(protected array $config)
     {
         $this->registry = new Registry();
-        $this->config = $config;
         $this->dispatcher = new EventDispatcher();
 
         $subscriber = new WorkflowSubscriber();
@@ -65,40 +53,26 @@ class WorkflowRegistry implements WorkflowRegistryInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function get($subject, $workflowName = null)
+    public function get($subject, $workflowName = null): WorkflowInterface
     {
         return $this->registry->get($subject, $workflowName);
     }
 
     /**
      * Add a workflow to the subject.
-     *
-     * @param StateWorkflow $workflow
-     * @param string        $className
      */
-    public function registerWorkflow(StateWorkflow $workflow, string $className)
+    public function registerWorkflow(StateWorkflow $workflow, string $className): void
     {
-        // Add method became addWorkflow method in Symfony Workflow Component v4.1
-        // InstanceOfSupportStrategy class became ClassInstanceSupportStrategy in v4.1
-        $method = method_exists($this->registry, 'addWorkflow') ? 'addWorkflow' : 'add';
-        $strategyClass = class_exists(InstanceOfSupportStrategy::class)
-            ? InstanceOfSupportStrategy::class
-            : ClassInstanceSupportStrategy::class;
-        $this->registry->$method($workflow, new $strategyClass($className));
+        $this->registry->addWorkflow($workflow, new InstanceOfSupportStrategy($className));
     }
 
     /**
      * Add a workflow to the registry from array.
      *
-     * @param       $name
-     * @param array $workflowData
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
-    public function addWorkflows($name, array $workflowData)
+    public function addWorkflows($name, array $workflowData): void
     {
         $definitionBuilder = new DefinitionBuilder($workflowData['states']);
 
@@ -121,19 +95,12 @@ class WorkflowRegistry implements WorkflowRegistryInterface
 
     /**
      * Return the workflow instance.
-     *
-     * @param                       $name
-     * @param array                 $workflowData
-     * @param Definition            $definition
-     * @param MarkingStoreInterface $markingStore
-     *
-     * @return mixed
      */
     protected function getWorkflowInstance(
         $name,
         array $workflowData,
         Definition $definition,
-        MarkingStoreInterface $markingStore
+        MarkingStoreInterface $markingStore,
     ) {
         $className = $this->getWorkflowClass($workflowData);
 
@@ -141,12 +108,11 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     }
 
     /**
-     * @param array $workflowData
-     * @param bool  $override
+     * @param bool $override
      *
      * @return mixed|string
      */
-    private function getWorkflowClass(array $workflowData, $override = true)
+    private function getWorkflowClass(array $workflowData, $override = true): string
     {
         if ($override) {
             $className = StateWorkflow::class;
@@ -162,16 +128,13 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     /**
      * Return the making store instance.
      *
-     * @param array $workflowData
      *
-     * @throws \ReflectionException
-     *
-     * @return object|MarkingStoreInterface
+     * @throws ReflectionException
      */
-    protected function getMarkingStoreInstance(array $workflowData)
+    protected function getMarkingStoreInstance(array $workflowData): object
     {
-        $markingStoreData = isset($workflowData['marking_store']) ? $workflowData['marking_store'] : [];
-        $propertyPath = isset($workflowData['property_path']) ? $workflowData['property_path'] : 'current_state';
+        $markingStoreData = $workflowData['marking_store'] ?? [];
+        $propertyPath = $workflowData['property_path'] ?? 'current_state';
 
         $singleState = true;
 
@@ -194,13 +157,11 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     /**
      * Register workflow subscribers.
      *
-     * @param $class
-     * @param $name
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      * @throws Exception
      */
-    public function addSubscriber($class, $name)
+    public function addSubscriber($class, $name): void
     {
         $reflection = new ReflectionClass($class);
 

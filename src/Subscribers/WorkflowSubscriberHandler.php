@@ -2,24 +2,22 @@
 
 namespace Ringierimu\StateWorkflow\Subscribers;
 
+use Illuminate\Events\Dispatcher;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowEventSubscriberInterface;
 
 /**
  * Class WorkflowSubscriberHandler.
  *
  * Dynamically register listener for workflow events
- *
- * @author Norby Baruani <norbyb@roam.africa/>
  */
 abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInterface
 {
-    /** @var null */
     protected $name;
 
     /**
      * WorkflowSubscriberHandler constructor.
      *
-     * @param $workflowName
+     * @param null|mixed $workflowName
      */
     public function __construct($workflowName = null)
     {
@@ -39,12 +37,12 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
      *   "App\Listeners\UserEventSubscriber@onGuardActivate"
      * );
      *
-     * @param \Illuminate\Events\Dispatcher $event
+     * @param Dispatcher $event
      */
-    public function subscribe($event)
+    public function subscribe($event): void
     {
         // get name of instantiated concrete class
-        $class = get_called_class();
+        $class = static::class;
         // loop through each method of the class
         foreach (get_class_methods($class) as $method) {
             // if the method name starts with 'on'
@@ -94,20 +92,17 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
      * workflow.[workflow name].entered
      * workflow.[workflow name].entered.[state name]
      *
-     * @param $name
      *
      * @return string
      */
     protected function key($name)
     {
         // remove on from beginning. eg. onGuard => Guard
-        $name = ltrim($name, 'on');
+        $name = ltrim((string) $name, 'on');
         // prepend uppercase letters with . eg. EnteredDeleted => .Entered.Deleted
-        $name = preg_replace_callback('/[A-Z]/', function ($m) {
-            return ".{$m[0]}";
-        }, $name);
+        $name = preg_replace_callback('/[A-Z]/', fn ($m) => ".{$m[0]}", $name);
         // remove trailing . eg. .Entered.Deleted => Entered.Deleted
-        $name = ltrim($name, '.');
+        $name = ltrim((string) $name, '.');
         // now that we have the dots we can lowercase the name. eg. Entered.Deleted => entered.deleted
         $name = strtolower($name);
 

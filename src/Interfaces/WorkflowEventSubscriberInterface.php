@@ -2,6 +2,8 @@
 
 namespace Ringierimu\StateWorkflow\Interfaces;
 
+use Illuminate\Events\Dispatcher;
+
 /**
  * Interface WorkflowEventSubscriberInterface.
  */
@@ -20,7 +22,7 @@ interface WorkflowEventSubscriberInterface
      *   "App\Listeners\UserEventSubscriber@onGuardActivate"
      * );
      *
-     * @param \Illuminate\Events\Dispatcher $event
+     * @param Dispatcher $event
      */
     public function subscribe($event);
 }

@@ -10,18 +10,10 @@ use Symfony\Component\Workflow\Event\Event;
 abstract class BaseEvent
 {
     /**
-     * @var Event
-     */
-    protected $originalEvent;
-
-    /**
      * BaseEvent constructor.
-     *
-     * @param Event $event
      */
-    public function __construct(Event $event)
+    public function __construct(protected Event $originalEvent)
     {
-        $this->originalEvent = $event;
     }
 
     /**

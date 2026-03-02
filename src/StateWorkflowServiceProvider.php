@@ -3,6 +3,7 @@
 namespace Ringierimu\StateWorkflow;
 
 use Illuminate\Support\ServiceProvider;
+use Override;
 use Ringierimu\StateWorkflow\Console\Commands\StateWorkflowDumpCommand;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
 
@@ -14,7 +15,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
     /**
      *  Bootstrap the application services.
      */
-    public function boot()
+    public function boot(): void
     {
         $this->publishConfig();
         $this->publishDatabase();
@@ -24,37 +25,32 @@ class StateWorkflowServiceProvider extends ServiceProvider
     /**
      *  Register the application services...
      */
-    public function register()
+    #[Override]
+    public function register(): void
     {
         $this->mergeConfigFrom($this->configPath(), 'workflow');
 
-        $this->app->singleton('stateWorkflow', function () {
-            return new WorkflowRegistry(
-                collect($this->app['config']->get('workflow'))
-                    ->except('setup')
-                    ->toArray()
-            );
-        });
+        $this->app->singleton('stateWorkflow', fn () => new WorkflowRegistry(
+            collect($this->app['config']->get('workflow'))
+                ->except('setup')
+                ->toArray(),
+        ));
 
         $this->app->alias('stateWorkflow', WorkflowRegistryInterface::class);
     }
 
     /**
      * Return config file.
-     *
-     * @return string
      */
-    protected function configPath()
+    protected function configPath(): string
     {
         return __DIR__ . '/../config/workflow.php';
     }
 
     /**
      * Return migrations path.
-     *
-     * @return string
      */
-    private function migrationPath()
+    private function migrationPath(): string
     {
         return __DIR__ . '/../database/migrations';
     }
@@ -96,6 +92,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
      *
      * @return array
      */
+    #[Override]
     public function provides()
     {
         return ['stateWorkflow'];
