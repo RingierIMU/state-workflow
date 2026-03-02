@@ -27,13 +27,13 @@ Requirements for this modernization milestone. Each maps to roadmap phases.
 
 ### Testing
 
-- [ ] **TEST-01**: All existing tests migrated from PHPUnit to Pest 4
-- [ ] **TEST-02**: `tests/Pest.php` correctly uses custom `TestCase` class (`Ringierimu\StateWorkflow\Tests\TestCase`)
-- [ ] **TEST-03**: Global `event()` mock in `WorkflowSubscriberTest` replaced with `Event::fake()` pattern
-- [ ] **TEST-04**: New test: multiple workflows registered on the same model
-- [ ] **TEST-05**: New test: subscriber event ordering verified across full transition lifecycle
-- [ ] **TEST-06**: New test: subscriber error handling when listener throws exception
-- [ ] **TEST-07**: `vendor/bin/pest` runs all tests successfully
+- [x] **TEST-01**: All existing tests migrated from PHPUnit to Pest 4
+- [x] **TEST-02**: `tests/Pest.php` correctly uses custom `TestCase` class (`Ringierimu\StateWorkflow\Tests\TestCase`)
+- [x] **TEST-03**: Global `event()` mock in `WorkflowSubscriberTest` replaced with `Event::fake()` pattern
+- [x] **TEST-04**: New test: multiple workflows registered on the same model
+- [x] **TEST-05**: New test: subscriber event ordering verified across full transition lifecycle
+- [x] **TEST-06**: New test: subscriber error handling when listener throws exception
+- [x] **TEST-07**: `vendor/bin/pest` runs all tests successfully
 
 ### CI/CD
 
@@ -91,13 +91,13 @@ Deferred to future release. Tracked but not in current roadmap.
 | RECT-02 | Phase 2 | Complete |
 | RECT-03 | Phase 2 | Complete |
 | RECT-04 | Phase 2 | Complete |
-| TEST-01 | Phase 3 | Pending |
-| TEST-02 | Phase 3 | Pending |
-| TEST-03 | Phase 3 | Pending |
-| TEST-04 | Phase 3 | Pending |
-| TEST-05 | Phase 3 | Pending |
-| TEST-06 | Phase 3 | Pending |
-| TEST-07 | Phase 3 | Pending |
+| TEST-01 | Phase 3 | Complete |
+| TEST-02 | Phase 3 | Complete |
+| TEST-03 | Phase 3 | Complete |
+| TEST-04 | Phase 3 | Complete |
+| TEST-05 | Phase 3 | Complete |
+| TEST-06 | Phase 3 | Complete |
+| TEST-07 | Phase 3 | Complete |
 | CICD-01 | Phase 4 | Pending |
 | CICD-02 | Phase 4 | Pending |
 | CICD-03 | Phase 4 | Pending |

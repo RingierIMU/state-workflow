@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Dependency Update** - Update composer.json constraints and remove Symfony compatibility shim
 - [x] **Phase 2: Rector Pass** - Apply driftingly/rector-laravel to src/ only, then remove Rector from dev dependencies
-- [ ] **Phase 3: Pest Migration and Test Expansion** - Migrate all PHPUnit tests to Pest 4 and add new coverage
+- [x] **Phase 3: Pest Migration and Test Expansion** - Migrate all PHPUnit tests to Pest 4 and add new coverage
 - [ ] **Phase 4: CI and Documentation** - Rebuild GitHub Actions matrix and update README/CHANGELOG
 
 ## Phase Details
@@ -54,7 +54,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. WorkflowSubscriberTest uses Event::fake() / Event::assertDispatched() — global event() namespace trick is gone
   4. `vendor/bin/pest --order=random` passes consistently (no ordering-dependent test failures)
   5. New tests exist and pass: multiple workflows on same model, subscriber event lifecycle ordering, subscriber error handling when listener throws
-**Plans**: TBD
+**Plans**: 3 plans
+- [x] 03-01-PLAN.md — Install Pest, create Pest.php, remove Helpers.php and funkjedi, update composer scripts
+- [x] 03-02-PLAN.md — Migrate UserUnitTest and WorkflowSubscriberTest to Pest closure syntax with Event::fake()
+- [x] 03-03-PLAN.md — Add MultiWorkflowTest, EventOrderingTest, ErrorHandlingTest
 
 ### Phase 4: CI and Documentation
 **Goal**: GitHub Actions validates the full matrix; README reflects current minimum versions
@@ -76,5 +79,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Dependency Update | 1/1 | Complete | 2026-03-02 |
 | 2. Rector Pass | 2/2 | Complete | 2026-03-02 |
-| 3. Pest Migration and Test Expansion | 0/TBD | Not started | - |
+| 3. Pest Migration and Test Expansion | 3/3 | Complete | 2026-03-02 |
 | 4. CI and Documentation | 0/TBD | Not started | - |
