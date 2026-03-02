@@ -1,7 +1,8 @@
 {
     "name": "ringierimu/state-workflow",
-    "type": "library",
     "description": "Laravel State Workflow provide tools for defining and managing workflows and activities with ease.",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "workflow",
         "state management",
@@ -9,8 +10,6 @@
         "state workflow",
         "laravel"
     ],
-    "homepage": "https://github.com/RingierIMU/state-workflow",
-    "license": "MIT",
     "authors": [
         {
             "name": "Norby Baruani",
@@ -18,28 +17,24 @@
             "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/RingierIMU/state-workflow",
     "require": {
         "php": "^8.3",
-        "illuminate/events": "^11.0|^12.0",
-        "illuminate/support": "^11.0|^12.0",
+        "illuminate/events": "^11.0 || ^12.0",
+        "illuminate/support": "^11.0 || ^12.0",
         "symfony/event-dispatcher": "^7.0",
-        "symfony/workflow": "^7.0",
-        "symfony/property-access": "^7.0"
+        "symfony/property-access": "^7.0",
+        "symfony/workflow": "^7.0"
     },
     "require-dev": {
-        "mockery/mockery": "^1.3|^1.4.2",
-        "orchestra/testbench": "^9.15|^10.0",
-        "phpunit/phpunit": "^10.0|^11.0",
+        "mockery/mockery": "^1.3",
+        "orchestra/testbench": "^9.15 || ^10.0",
         "pestphp/pest": "^3.0",
-        "pestphp/pest-plugin-laravel": "^3.0"
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "phpunit/phpunit": "^10.0 || ^11.0"
     },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Ringierimu\\StateWorkflow\\StateWorkflowServiceProvider"
-            ]
-        }
-    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Ringierimu\\StateWorkflow\\": "src/"
@@ -50,14 +45,19 @@
             "Ringierimu\\StateWorkflow\\Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ringierimu\\StateWorkflow\\StateWorkflowServiceProvider"
+            ]
+        }
+    },
     "scripts": {
-      "test": "vendor/bin/pest"
+        "test": "vendor/bin/pest"
     }
 }

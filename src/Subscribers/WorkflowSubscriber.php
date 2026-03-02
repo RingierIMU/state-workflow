@@ -14,8 +14,6 @@ use Symfony\Component\Workflow\Event\GuardEvent as SymfonyGuardEvent;
 
 /**
  * Class WorkflowSubscriber.
- *
- * @author Norby Baruani <norbyb@roam.africa/>
  */
 class WorkflowSubscriber implements EventSubscriberInterface
 {

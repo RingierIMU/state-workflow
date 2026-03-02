@@ -10,9 +10,6 @@ use Ringierimu\StateWorkflow\Tests\Fixtures\Subscriber\UserEventSubscriber;
  */
 trait ConfigTrait
 {
-    /**
-     * @return array
-     */
     public function getWorflowConfig(): array
     {
         return [

@@ -3,6 +3,7 @@
 namespace Ringierimu\StateWorkflow;
 
 use Illuminate\Support\ServiceProvider;
+use Override;
 use Ringierimu\StateWorkflow\Console\Commands\StateWorkflowDumpCommand;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowRegistryInterface;
 
@@ -24,15 +25,15 @@ class StateWorkflowServiceProvider extends ServiceProvider
     /**
      *  Register the application services...
      */
-    #[\Override]
+    #[Override]
     public function register(): void
     {
         $this->mergeConfigFrom($this->configPath(), 'workflow');
 
-        $this->app->singleton('stateWorkflow', fn() => new WorkflowRegistry(
+        $this->app->singleton('stateWorkflow', fn () => new WorkflowRegistry(
             collect($this->app['config']->get('workflow'))
                 ->except('setup')
-                ->toArray()
+                ->toArray(),
         ));
 
         $this->app->alias('stateWorkflow', WorkflowRegistryInterface::class);
@@ -91,7 +92,7 @@ class StateWorkflowServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    #[\Override]
+    #[Override]
     public function provides()
     {
         return ['stateWorkflow'];

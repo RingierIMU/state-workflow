@@ -16,24 +16,19 @@ class StateWorkflow extends Workflow implements StateWorkflowInterface
 {
     /**
      * StateWorkflow constructor.
-     *
-     * @param MarkingStoreInterface|null    $markingStore
-     * @param EventDispatcherInterface|null $dispatcher
      */
     public function __construct(
         protected array $config,
         Definition $definition,
         MarkingStoreInterface $markingStore = null,
         EventDispatcherInterface $dispatcher = null,
-        string $name = 'unnamed'
+        string $name = 'unnamed',
     ) {
         parent::__construct($definition, $markingStore, $dispatcher, $name);
     }
 
     /**
      * Returns the current state.
-     *
-     * @param $object
      */
     public function getState($object): mixed
     {

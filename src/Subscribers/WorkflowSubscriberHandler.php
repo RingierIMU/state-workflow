@@ -2,14 +2,13 @@
 
 namespace Ringierimu\StateWorkflow\Subscribers;
 
+use Illuminate\Events\Dispatcher;
 use Ringierimu\StateWorkflow\Interfaces\WorkflowEventSubscriberInterface;
 
 /**
  * Class WorkflowSubscriberHandler.
  *
  * Dynamically register listener for workflow events
- *
- * @author Norby Baruani <norbyb@roam.africa/>
  */
 abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInterface
 {
@@ -18,7 +17,7 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
     /**
      * WorkflowSubscriberHandler constructor.
      *
-     * @param $workflowName
+     * @param null|mixed $workflowName
      */
     public function __construct($workflowName = null)
     {
@@ -38,7 +37,7 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
      *   "App\Listeners\UserEventSubscriber@onGuardActivate"
      * );
      *
-     * @param \Illuminate\Events\Dispatcher $event
+     * @param Dispatcher $event
      */
     public function subscribe($event): void
     {
@@ -93,7 +92,6 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
      * workflow.[workflow name].entered
      * workflow.[workflow name].entered.[state name]
      *
-     * @param $name
      *
      * @return string
      */
@@ -102,7 +100,7 @@ abstract class WorkflowSubscriberHandler implements WorkflowEventSubscriberInter
         // remove on from beginning. eg. onGuard => Guard
         $name = ltrim((string) $name, 'on');
         // prepend uppercase letters with . eg. EnteredDeleted => .Entered.Deleted
-        $name = preg_replace_callback('/[A-Z]/', fn($m) => ".{$m[0]}", $name);
+        $name = preg_replace_callback('/[A-Z]/', fn ($m) => ".{$m[0]}", $name);
         // remove trailing . eg. .Entered.Deleted => Entered.Deleted
         $name = ltrim((string) $name, '.');
         // now that we have the dots we can lowercase the name. eg. Entered.Deleted => entered.deleted

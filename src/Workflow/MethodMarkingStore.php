@@ -3,6 +3,7 @@
 namespace Ringierimu\StateWorkflow\Workflow;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Workflow\Marking;
 use Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface;
 
@@ -11,23 +12,20 @@ use Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface;
  */
 class MethodMarkingStore implements MarkingStoreInterface
 {
-    private readonly \Symfony\Component\PropertyAccess\PropertyAccessor $propertyAccessor;
+    private readonly PropertyAccessor $propertyAccessor;
 
     /**
      * MethodMarkingStore constructor.
      *
-     * @param string $property    Used to determine methods to call
-     *                            The `getMarking` method will use `$subject->getProperty()`
-     *                            The `setMarking` method will use `$subject->setProperty(string|array $places, array $context = array())`
+     * @param string $property Used to determine methods to call
+     *                         The `getMarking` method will use `$subject->getProperty()`
+     *                         The `setMarking` method will use `$subject->setProperty(string|array $places, array $context = array())`
      */
     public function __construct(private readonly bool $singleState = false, private readonly string $property = 'marking')
     {
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMarking(object $subject): Marking
     {
         $marking = $this->propertyAccessor->getValue($subject, $this->property);
@@ -43,9 +41,6 @@ class MethodMarkingStore implements MarkingStoreInterface
         return new Marking($marking);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setMarking(object $subject, Marking $marking, array $context = []): void
     {
         $this->propertyAccessor->setValue($subject, $this->property, key($marking->getPlaces()));

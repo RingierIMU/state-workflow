@@ -13,7 +13,7 @@ interface WorkflowRegistryInterface
      * Returns SateWorkflow.
      *
      * @param object $object
-     * @param null   $workflowName
+     * @param null $workflowName
      *
      * @return WorkflowInterface
      */
@@ -21,9 +21,6 @@ interface WorkflowRegistryInterface
 
     /**
      * Register workflow subscribers.
-     *
-     * @param $class
-     * @param $name
      */
     public function addSubscriber($class, $name);
 }

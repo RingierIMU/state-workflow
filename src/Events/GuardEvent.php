@@ -2,6 +2,8 @@
 
 namespace Ringierimu\StateWorkflow\Events;
 
+use Override;
+use Symfony\Component\Workflow\Event\Event;
 use Symfony\Component\Workflow\Event\GuardEvent as SymfonyGuardEvent;
 
 /**
@@ -20,9 +22,9 @@ class GuardEvent extends BaseEvent
     }
 
     /**
-     * @return \Symfony\Component\Workflow\Event\Event|SymfonyGuardEvent
+     * @return Event|SymfonyGuardEvent
      */
-    #[\Override]
+    #[Override]
     public function getOriginalEvent()
     {
         return $this->originalEvent;

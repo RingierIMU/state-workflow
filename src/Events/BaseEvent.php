@@ -12,7 +12,7 @@ abstract class BaseEvent
     /**
      * BaseEvent constructor.
      */
-    public function __construct(protected \Symfony\Component\Workflow\Event\Event $originalEvent)
+    public function __construct(protected Event $originalEvent)
     {
     }
 
