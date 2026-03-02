@@ -40,7 +40,9 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. No public API signatures change in HasWorkflowTrait, StateWorkflow, or WorkflowRegistry (verified by diff review before apply)
   3. The full PHPUnit test suite passes after Rector is applied — changes are safe
   4. `composer.json` dev dependencies no longer include rector/rector or driftingly/rector-laravel; rector.php is deleted
-**Plans**: TBD
+**Plans:** 2 plans
+- [ ] 02-01-PLAN.md — Install Rector, configure for src/ only, run dry-run, review API safety, apply modernization, verify tests pass
+- [ ] 02-02-PLAN.md — Remove Rector and driftingly/rector-laravel from dev dependencies, delete rector.php
 
 ### Phase 3: Pest Migration and Test Expansion
 **Goal**: All tests run under Pest 4; new tests cover multiple workflows, subscriber event ordering, and error paths
