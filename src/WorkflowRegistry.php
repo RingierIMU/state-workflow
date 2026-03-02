@@ -25,32 +25,19 @@ use Symfony\Component\Workflow\Workflow;
  */
 class WorkflowRegistry implements WorkflowRegistryInterface
 {
-    /**
-     * @var Registry
-     */
-    protected $registry;
+    protected \Symfony\Component\Workflow\Registry $registry;
 
-    /**
-     * @var array
-     */
-    protected $config;
-
-    /**
-     * @var EventDispatcher
-     */
-    protected $dispatcher;
+    protected \Symfony\Component\EventDispatcher\EventDispatcher $dispatcher;
 
     /**
      * WorkflowRegistry constructor.
      *
-     * @param array $config
      *
      * @throws \ReflectionException
      */
-    public function __construct(array $config)
+    public function __construct(protected array $config)
     {
         $this->registry = new Registry();
-        $this->config = $config;
         $this->dispatcher = new EventDispatcher();
 
         $subscriber = new WorkflowSubscriber();
@@ -67,18 +54,15 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function get($subject, $workflowName = null)
+    public function get($subject, $workflowName = null): \Symfony\Component\Workflow\WorkflowInterface
     {
         return $this->registry->get($subject, $workflowName);
     }
 
     /**
      * Add a workflow to the subject.
-     *
-     * @param StateWorkflow $workflow
-     * @param string        $className
      */
-    public function registerWorkflow(StateWorkflow $workflow, string $className)
+    public function registerWorkflow(StateWorkflow $workflow, string $className): void
     {
         $this->registry->addWorkflow($workflow, new InstanceOfSupportStrategy($className));
     }
@@ -87,11 +71,10 @@ class WorkflowRegistry implements WorkflowRegistryInterface
      * Add a workflow to the registry from array.
      *
      * @param       $name
-     * @param array $workflowData
      *
      * @throws \ReflectionException
      */
-    public function addWorkflows($name, array $workflowData)
+    public function addWorkflows($name, array $workflowData): void
     {
         $definitionBuilder = new DefinitionBuilder($workflowData['states']);
 
@@ -116,9 +99,6 @@ class WorkflowRegistry implements WorkflowRegistryInterface
      * Return the workflow instance.
      *
      * @param                       $name
-     * @param array                 $workflowData
-     * @param Definition            $definition
-     * @param MarkingStoreInterface $markingStore
      *
      * @return mixed
      */
@@ -134,12 +114,10 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     }
 
     /**
-     * @param array $workflowData
      * @param bool  $override
-     *
      * @return mixed|string
      */
-    private function getWorkflowClass(array $workflowData, $override = true)
+    private function getWorkflowClass(array $workflowData, $override = true): string
     {
         if ($override) {
             $className = StateWorkflow::class;
@@ -155,16 +133,14 @@ class WorkflowRegistry implements WorkflowRegistryInterface
     /**
      * Return the making store instance.
      *
-     * @param array $workflowData
      *
      * @throws \ReflectionException
      *
-     * @return object|MarkingStoreInterface
      */
-    protected function getMarkingStoreInstance(array $workflowData)
+    protected function getMarkingStoreInstance(array $workflowData): object
     {
-        $markingStoreData = isset($workflowData['marking_store']) ? $workflowData['marking_store'] : [];
-        $propertyPath = isset($workflowData['property_path']) ? $workflowData['property_path'] : 'current_state';
+        $markingStoreData = $workflowData['marking_store'] ?? [];
+        $propertyPath = $workflowData['property_path'] ?? 'current_state';
 
         $singleState = true;
 
@@ -193,7 +169,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
      * @throws \ReflectionException
      * @throws Exception
      */
-    public function addSubscriber($class, $name)
+    public function addSubscriber($class, $name): void
     {
         $reflection = new ReflectionClass($class);
 

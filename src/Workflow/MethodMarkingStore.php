@@ -11,22 +11,17 @@ use Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface;
  */
 class MethodMarkingStore implements MarkingStoreInterface
 {
-    private $property;
-    private $propertyAccessor;
-    private $singleState;
+    private readonly \Symfony\Component\PropertyAccess\PropertyAccessor $propertyAccessor;
 
     /**
      * MethodMarkingStore constructor.
      *
-     * @param bool   $singleState
      * @param string $property    Used to determine methods to call
      *                            The `getMarking` method will use `$subject->getProperty()`
      *                            The `setMarking` method will use `$subject->setProperty(string|array $places, array $context = array())`
      */
-    public function __construct(bool $singleState = false, string $property = 'marking')
+    public function __construct(private readonly bool $singleState = false, private readonly string $property = 'marking')
     {
-        $this->singleState = $singleState;
-        $this->property = $property;
         $this->propertyAccessor = PropertyAccess::createPropertyAccessor();
     }
 

@@ -102,7 +102,6 @@ trait HasWorkflowTrait
     /**
      * Save Model changes and log changes to StateHistory table.
      *
-     * @param array $transitionData
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
@@ -127,26 +126,18 @@ trait HasWorkflowTrait
      * Model configuration name on config/workflow.php.
      *
      * @throws \ReflectionException
-     *
-     * @return string
      */
-    public function configName()
+    public function configName(): string
     {
         return lcfirst((new \ReflectionClass($this))->getShortName());
     }
 
-    /**
-     * @return string
-     */
-    public function authUserForeignKey()
+    public function authUserForeignKey(): string
     {
         return 'user_id';
     }
 
-    /**
-     * @return string
-     */
-    public function modelPrimaryKey()
+    public function modelPrimaryKey(): string
     {
         return 'id';
     }

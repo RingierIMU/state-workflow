@@ -39,7 +39,7 @@ class StateWorkflowDumpCommand extends Command
      * @throws \ReflectionException
      * @throws Exception
      */
-    public function handle()
+    public function handle(): void
     {
         $workflowName = $this->argument('workflow');
         $format = $this->option('format');

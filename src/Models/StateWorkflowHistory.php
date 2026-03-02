@@ -30,13 +30,6 @@ class StateWorkflowHistory extends Model
     ];
 
     /**
-     * @var array
-     */
-    protected $casts = [
-        'context' => 'array',
-    ];
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function model()
@@ -50,5 +43,12 @@ class StateWorkflowHistory extends Model
     public function user()
     {
         return $this->belongsTo(config('workflow.setup.user_class'));
+    }
+    #[\Override]
+    protected function casts(): array
+    {
+        return [
+            'context' => 'array',
+        ];
     }
 }

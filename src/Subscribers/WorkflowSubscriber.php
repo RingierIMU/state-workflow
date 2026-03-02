@@ -21,10 +21,8 @@ class WorkflowSubscriber implements EventSubscriberInterface
 {
     /**
      * Validate whether the transition is allowed at all.
-     *
-     * @param SymfonyGuardEvent $event
      */
-    public function guardEvent(SymfonyGuardEvent $event)
+    public function guardEvent(SymfonyGuardEvent $event): void
     {
         $workflowName = $event->getWorkflowName();
         $transitionName = $event->getTransition()->getName();
@@ -37,10 +35,8 @@ class WorkflowSubscriber implements EventSubscriberInterface
 
     /**
      * The subject is about to leave a place.
-     *
-     * @param Event $event
      */
-    public function leaveEvent(Event $event)
+    public function leaveEvent(Event $event): void
     {
         $places = $event->getTransition()->getFroms();
         $workflowName = $event->getWorkflowName();
@@ -56,10 +52,8 @@ class WorkflowSubscriber implements EventSubscriberInterface
 
     /**
      * The subject is going through this transition.
-     *
-     * @param Event $event
      */
-    public function transitionEvent(Event $event)
+    public function transitionEvent(Event $event): void
     {
         $workflowName = $event->getWorkflowName();
         $transitionName = $event->getTransition()->getName();
@@ -73,10 +67,8 @@ class WorkflowSubscriber implements EventSubscriberInterface
     /**
      * The subject is about to enter a new place. This event is triggered just before the subject places are updated,
      * which means that the marking of the subject is not yet updated with the new places.
-     *
-     * @param Event $event
      */
-    public function enterEvent(Event $event)
+    public function enterEvent(Event $event): void
     {
         $places = $event->getTransition()->getTos();
         $workflowName = $event->getWorkflowName();
@@ -92,10 +84,8 @@ class WorkflowSubscriber implements EventSubscriberInterface
 
     /**
      * The subject has entered in the places and the marking is updated (making it a good place to flush data in Doctrine).
-     *
-     * @param Event $event
      */
-    public function enteredEvent(Event $event)
+    public function enteredEvent(Event $event): void
     {
         $places = $event->getTransition()->getTos();
         $workflowName = $event->getWorkflowName();
@@ -125,10 +115,8 @@ class WorkflowSubscriber implements EventSubscriberInterface
 
     /**
      * The object has completed this transition.
-     *
-     * @param Event $event
      */
-    public function completedEvent(Event $event)
+    public function completedEvent(Event $event): void
     {
         $workflowName = $event->getWorkflowName();
         $transitionName = $event->getTransition()->getName();

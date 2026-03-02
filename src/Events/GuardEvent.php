@@ -13,8 +13,6 @@ class GuardEvent extends BaseEvent
 {
     /**
      * GuardEvent constructor.
-     *
-     * @param SymfonyGuardEvent $event
      */
     public function __construct(SymfonyGuardEvent $event)
     {
@@ -24,6 +22,7 @@ class GuardEvent extends BaseEvent
     /**
      * @return \Symfony\Component\Workflow\Event\Event|SymfonyGuardEvent
      */
+    #[\Override]
     public function getOriginalEvent()
     {
         return $this->originalEvent;
