@@ -16,7 +16,6 @@ use Symfony\Component\Workflow\DefinitionBuilder;
 use Symfony\Component\Workflow\MarkingStore\MarkingStoreInterface;
 use Symfony\Component\Workflow\Registry;
 use Symfony\Component\Workflow\StateMachine;
-use Symfony\Component\Workflow\SupportStrategy\ClassInstanceSupportStrategy;
 use Symfony\Component\Workflow\SupportStrategy\InstanceOfSupportStrategy;
 use Symfony\Component\Workflow\Transition;
 use Symfony\Component\Workflow\Workflow;
@@ -81,13 +80,7 @@ class WorkflowRegistry implements WorkflowRegistryInterface
      */
     public function registerWorkflow(StateWorkflow $workflow, string $className)
     {
-        // Add method became addWorkflow method in Symfony Workflow Component v4.1
-        // InstanceOfSupportStrategy class became ClassInstanceSupportStrategy in v4.1
-        $method = method_exists($this->registry, 'addWorkflow') ? 'addWorkflow' : 'add';
-        $strategyClass = class_exists(InstanceOfSupportStrategy::class)
-            ? InstanceOfSupportStrategy::class
-            : ClassInstanceSupportStrategy::class;
-        $this->registry->$method($workflow, new $strategyClass($className));
+        $this->registry->addWorkflow($workflow, new InstanceOfSupportStrategy($className));
     }
 
     /**

@@ -51,7 +51,7 @@ class MethodMarkingStore implements MarkingStoreInterface
     /**
      * {@inheritdoc}
      */
-    public function setMarking(object $subject, Marking $marking, array $context = [])
+    public function setMarking(object $subject, Marking $marking, array $context = []): void
     {
         $this->propertyAccessor->setValue($subject, $this->property, key($marking->getPlaces()));
     }

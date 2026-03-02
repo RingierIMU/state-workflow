@@ -4,7 +4,6 @@ namespace Ringierimu\StateWorkflow\Tests\Unit;
 
 use Ringierimu\StateWorkflow\Tests\TestCase;
 use Ringierimu\StateWorkflow\Workflow\StateWorkflow;
-use Symfony\Component\Workflow\Exception\LogicException;
 use Symfony\Component\Workflow\Exception\NotEnabledTransitionException;
 
 /**
@@ -30,10 +29,7 @@ class UserUnitTest extends TestCase
 
     public function test_invalid_transition_throws_exception()
     {
-        $expectedExceptionClass = class_exists(NotEnabledTransitionException::class)
-            ? NotEnabledTransitionException::class
-            : LogicException::class;
-        $this->expectException($expectedExceptionClass);
+        $this->expectException(NotEnabledTransitionException::class);
 
         $this->user->applyTransition('block');
     }
