@@ -51,6 +51,8 @@ jobs:
 
       - name: Install Composer dependencies
         run: |
+          # Every laravel/framework 11.x release has a Packagist advisory; Composer >= 2.9 refuses to resolve them.
+          if [ "${{ matrix.laravel }}" = "11.*" ]; then composer config policy.advisories.block false; fi
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
