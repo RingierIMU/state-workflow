@@ -41,3 +41,12 @@ test('apply transitions through full lifecycle', function () {
     expect($this->user->state())->toBe('deleted');
     expect($this->user->stateHistory()->count())->toBe(4);
 });
+
+test('model with a resolved workflow survives serialization', function () {
+    $this->user->workflow();
+
+    $restored = unserialize(serialize($this->user));
+
+    expect($restored->state())->toBe('new');
+    expect($restored->canTransition('create'))->toBeTrue();
+});

@@ -17,7 +17,11 @@ use Symfony\Component\Workflow\Transition;
  */
 trait HasWorkflowTrait
 {
-    /** @var StateWorkflow */
+    /**
+     * @deprecated Never set. Kept so models serialized by earlier versions unserialize without a dynamic property.
+     *
+     * @var StateWorkflow|null
+     */
     protected $workflow;
 
     /**
@@ -39,11 +43,7 @@ trait HasWorkflowTrait
      */
     public function workflow()
     {
-        if (!$this->workflow) {
-            $this->workflow = app(WorkflowRegistryInterface::class)->get($this, $this->configName());
-        }
-
-        return $this->workflow;
+        return app(WorkflowRegistryInterface::class)->get($this, $this->configName());
     }
 
     /**
